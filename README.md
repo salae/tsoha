@@ -1,4 +1,4 @@
-tsoha
+﻿tsoha
 =====
 
-Tietokantasovellus (aineopintojen harjoitustyö)
+Tietokantasovellus (aineopintojen harjoitustyö) aiheena kurssikysely.
