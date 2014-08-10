@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kurssikysely - raportit</title>
+    <title>Kurssikysely - kurssikyselyn tietojen muokkaaminen</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -9,7 +9,7 @@
     <link href="../css/main.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       
       <!--  ylähäälle tulee kirjautuminen -->
       
@@ -38,44 +38,27 @@
                   <li><a href="henkilot.html">Henkilöt</a></li>
                   <li><a href="raportit.html">Raportit</a></li> 
               </ul>
-          </div>       
-      
+          </div>
+        
       <!-- varsinainen sisältö  -->      
       
-          <div class="col-md-9">
-            <h2>Raportit</h2>
+          <div class="col-md-7">
+            <h2>Kurssikyselyn tietojen muokkaaminen</h2>
             
-            <h3>Omat kurssisi</h3>
-            <p>
-             Saat halutessasi yksityiskohtaisen raportin sellaiselta kurssilta, 
-             jossa olet ollut opettajana.
-            </p>
+            <h3>Kaikille kursseille yhteiset kysymykset</h3>
             
-            <p>
-              Valitse haluamasi kurssi.
-            </p>
+            <h3>Laitoksen kursseille yhteiset kysymykset</h3>
             
-            <div class="form-group">           
-              <div class="col-md-6">
-                <select class="form-control">
-                  <option>-</option>
-                  <option>Tietokantojen perusteet (14.9.2014)</option>
-                  <option>Tietokantojen perusteet (14.9.2011)</option>
-                </select>
-              </div>
-            </div>
-            <br>
+            <h3>Loput kysymykset</h3>
             
-            
-            <h3>Laitoksen kurssit</h3>
-            
-            <p>
-              Saat yhteenvetotietoja oman laitoksesi kursseista.
-            </p>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Merkitse kysely aktiiviseksi
+              </label>
+            </div>            
             
           </div>
-     
-      </div> 
+      </div>
     </div>
   </body>
 </html>
