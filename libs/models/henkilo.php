@@ -21,7 +21,8 @@ class Henkilo {
   }
   
   
-  /* Kirjoita tähän gettereitä ja settereitä */
+  // getterit ja setterit
+  
   public function getId() {
       return $this->id;
   }
@@ -78,28 +79,29 @@ class Henkilo {
       $this->yllapitaja = $yllapitaja;
   }
 
-    
-  public static function etsiKaikkiKayttajat() {
-      $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja FROM Henkilo";
-      $kysely = getTietokantayhteys()->prepare($sql);
-      $kysely->execute();
-
-      $tulokset = array();
-      foreach($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-        $kayttaja = new Henkilo();
-        $kayttaja->setId($tulos->id);
-        $kayttaja->setEtunimi($tulos->etunimi);
-        $kayttaja->setSukunimi($tulos->sukunimi);
-        $kayttaja->setTunnus($tulos->tunnus);
-        $kayttaja->setSalanana($tulos->salasana);
-        $kayttaja->setLaitos($tulos->laitos);
-        $kayttaja->setYllapitaja($tulos->yllapitaja);
-
-        //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
-        //Se vastaa melko suoraan ArrayList:in add-metodia.
-        $tulokset[] = $kayttaja;
-    }
-    return $tulokset;
-  }
-  
+// katotaan tätä myöhemmin...
+//    
+//  public static function etsiKaikkiKayttajat() {
+//      $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja FROM Henkilo";
+//      $kysely = getTietokantayhteys()->prepare($sql);
+//      $kysely->execute();
+//
+//      $tulokset = array();
+//      foreach($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+//        $kayttaja = new Henkilo();
+//        $kayttaja->setId($tulos->id);
+//        $kayttaja->setEtunimi($tulos->etunimi);
+//        $kayttaja->setSukunimi($tulos->sukunimi);
+//        $kayttaja->setTunnus($tulos->tunnus);
+//        $kayttaja->setSalanana($tulos->salasana);
+//        $kayttaja->setLaitos($tulos->laitos);
+//        $kayttaja->setYllapitaja($tulos->yllapitaja);
+//
+//        //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
+//        //Se vastaa melko suoraan ArrayList:in add-metodia.
+//        $tulokset[] = $kayttaja;
+//    }
+//    return $tulokset;
+//  }
+//  
 }
