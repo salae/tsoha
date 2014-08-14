@@ -38,7 +38,7 @@
                   <li><a href="raportit.html">Raportit</a></li> 
               </ul>
           </div> 
-        </div> 
+
       
       <!-- varsinainen sisältö  -->   
       
@@ -52,7 +52,7 @@
         require 'views/'.$sivu.'.php'; 
       ?>
 
-      
+        </div> 
       </div> 
    </body>
 </html>
