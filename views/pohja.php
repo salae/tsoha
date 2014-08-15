@@ -50,7 +50,10 @@
          * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
          */
 //        require $sivu.'.php'; 
-         require 'views/'.$sivu.'.php';        
+         require 'views/'.$sivu.'.php'; 
+         require 'views/testi1.php'; 
+         require 'testi2.php'; 
+         require '../views/testi3.php'; 
       ?>
 
         </div> 

@@ -1,8 +1,8 @@
-INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Mikko', 'Muikku', 'mikku', '12345', 'Matematiikka ja tilastotiede', FALSE);
+INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Mikko', 'Matikka', 'mikkkoma', '12345', 'Matematiikka ja tilastotiede', FALSE);
 INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Outi', 'Olio', 'outolio', 'password', 'Tietojenkäsittelytiede', TRUE);
 INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Tiina', 'Tutkija', 'tiitu', 'salasana', 'Matematiikka ja tilastotiede', TRUE);
-INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Antti', 'Ahven', 'antta', '54321', 'Kemia', FALSE);
-INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Mirja', 'Muikku', 'murja', 'qwerty', 'Tietojenkäsittelytiede', TRUE);
+INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Antti', 'Alkemia', 'antel', '54321', 'Kemia', FALSE);
+INSERT INTO Henkilo (etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja) VALUES ('Mirja', 'Matikka', 'mirma', 'qwerty', 'Tietojenkäsittelytiede', TRUE);
 
 INSERT INTO Kurssi (opettaja, nimi, alkuPVM, loppuPVM, laitos) VALUES (1, 'Logiikka I','2015-01-14' , '2015-05-31', 'Matematiikka ja tilastotiede');
 INSERT INTO Kurssi (opettaja, nimi, alkuPVM, loppuPVM, laitos, kysely_aktiivinen) VALUES (4, 'Biologinen kemia', '2014-08-04', '2014-09-15', 'Kemia', true);
