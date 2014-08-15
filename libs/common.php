@@ -2,6 +2,8 @@
   
   function naytaNakyma($sivu) {
     require 'views/pohja.php';
+    require 'views/testi1.php'; 
+    require 'views/'.$sivu.'.php'; 
     exit();
   }
   
