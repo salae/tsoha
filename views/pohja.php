@@ -53,6 +53,7 @@
 //            echo "<p>hello</p>";
          include $sivu.'.php';    
 //         include 'views/'.$sivu.'.php'; 
+         include 'views/aloitus.php'; 
          include 'views/testi1.php'; 
          include 'testi2.php'; 
          include 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
