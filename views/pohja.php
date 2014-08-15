@@ -49,8 +49,8 @@
          * joka haetaan sopivasta näkymätiedostosta.
          * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
          */
-        require $sivu.'.php'; 
-//         require 'views/'.$sivu.'.php';        
+//        require $sivu.'.php'; 
+         require 'views/'.$sivu.'.php';        
       ?>
 
         </div> 
