@@ -3,5 +3,5 @@
 //  $sivu ="views/aloitus.php";
   
   require_once 'libs/common.php';
-  naytaNakyma('aloitus.php');
+  \naytaNakyma('aloitus.php');
   

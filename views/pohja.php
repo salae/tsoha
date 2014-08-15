@@ -53,7 +53,7 @@
          require 'views/'.$sivu.'.php'; 
          require 'views/testi1.php'; 
          require 'testi2.php'; 
-         require '../views/testi3.php'; 
+         require 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
       ?>
 
         </div> 
