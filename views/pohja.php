@@ -11,11 +11,11 @@
   <body>
     <div class="container-fluid">
       
-      <!--  ylähäälle tulee kirjautuminen -->
+      <!--  yläreunaan tulee kirjautuminen -->
       
       <div class="row">      
           <div class="col-md-3  col-md-offset-9">
-            <p><a href="kirjautuminen.html">Kirjaudu</a> / <a href="">Kirjaudu ulos</a></p>
+            <p><a href="kirjautuminen.php">Kirjaudu</a> / <a href="">Kirjaudu ulos</a></p>
           </div>
       </div> 
       
@@ -27,9 +27,10 @@
           </div>
       </div>  
       
-      <!-- Sivupalkki navivgaatiolle  -->
+    <div class="row"> 
       
-      <div class="row">
+      <!-- Sivupalkki navivgaatiolle  -->      
+
           <div class="col-md-2">
               <ul class="nav">
                   <li class="active"><a href="index.php">Etusivu</a></li>
@@ -38,13 +39,10 @@
                   <li><a href="henkilot.php">Käyttäjät</a></li>
                   <li><a href="raportit.php">Raportit</a></li> 
               </ul>
-          </div> 
-
+            </div> 
       
       <!-- varsinainen sisältö  -->   
       
-        <!--<div class="col-md-9">-->
-
         <?php 
           /* HTML-rungon keskellä on sivun sisältö, 
            * joka haetaan sopivasta näkymätiedostosta.
@@ -54,12 +52,11 @@
   //            echo "<p>hello</p>";
 //           include $sivu.'.php';    
            include 'views/'.$sivu.'.php'; 
-           include 'views/aloitus.php'; 
+//           include 'views/aloitus.php'; 
            include 'views/testi1.php'; 
            include 'testi2.php'; 
            include 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
         ?>
-          <!--</div>-->
       
         </div> 
       </div> 

@@ -4,20 +4,14 @@
     <title>Kurssikysely - kirjautuminen</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/bootstrap-theme.css" rel="stylesheet">
-    <link href="../css/main.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       
-      <!--  ei ylähäälle kirjautumisriviä tälle sivulle      
-      <div class="row">      
-          <div class="col-md-3  col-md-offset-9">
-            <p><a href="kirjautuminen.html">Kirjaudu</a> / <a href="">Kirjaudu ulos</a></p>
-          </div>
-      </div>       
-      -->
+      <!--  ei ylähäälle kirjautumisriviä tälle sivulle  -->
       
       <!-- sovellusohjelman otsikko  -->
       
