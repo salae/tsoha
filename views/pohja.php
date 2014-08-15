@@ -4,9 +4,9 @@
     <title>Kurssikysely</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/bootstrap-theme.css" rel="stylesheet">
-    <link href="../css/main.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
     <div class="container-fluid">
@@ -53,7 +53,7 @@
   //        require $sivu.'.php'; 
   //            echo "<p>hello</p>";
 //           include $sivu.'.php';    
-  //         include 'views/'.$sivu.'.php'; 
+           include 'views/'.$sivu.'.php'; 
            include 'views/aloitus.php'; 
            include 'views/testi1.php'; 
            include 'testi2.php'; 
