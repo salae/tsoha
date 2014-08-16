@@ -1,8 +1,6 @@
 
 <!-- varsinainen sisältö  -->      
 
-  <div class="col-md-9">
-
     <p>
       Kurssikysely-sivustolla voit antaa mielipiteesi käymästäsi kurssista.
     </p>
@@ -33,4 +31,4 @@
       oikeudet, voit myös muokata järjestelmän tietoja.
     </p>
 
-  </div>
+ 

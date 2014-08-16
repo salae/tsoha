@@ -43,23 +43,25 @@
       
       <!-- varsinainen sisältö  -->   
       
-        <?php 
-          /* HTML-rungon keskellä on sivun sisältö, 
-           * joka haetaan sopivasta näkymätiedostosta.
-           * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
-           */
-   
-           include 'views/'.$sivu.'.php'; 
-           
-           if (!empty($data->virhe)): ?>
-           <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-           <?php endif;
+        <div class="col-md-10">
+          <?php 
+            /* HTML-rungon keskellä on sivun sisältö, 
+             * joka haetaan sopivasta näkymätiedostosta.
+             * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+             */
 
-//           include 'views/testi1.php'; 
-//           include 'testi2.php'; 
-//           include 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
-        ?>
+             include 'views/'.$sivu.'.php'; 
+
+             if (!empty($data->virhe)): ?>
+             <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
+             <?php endif;
+
+  //           include 'views/testi1.php'; 
+  //           include 'testi2.php'; 
+  //           include 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
+          ?>
       
+           </div>
         </div> 
       </div> 
    </body>
