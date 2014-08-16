@@ -38,23 +38,24 @@
       
           <div class="col-md-9">
             <h2>Kirjautuminen</h2>
-            <form class="form-horizonal" role="form" action="" method="POST">
+            
+            <form class="form-horizonal" role="form" action="kirjautuminen.php" method="POST">
+              <!--<div class="form-group">-->
+                <label for="tunnus" class="col-md-2 control-label">Käyttäjätunnus: </label>
+                <input type="text" class="form-control" name="tunnus" placeholder="Käyttäjätunnus"> 
+              <!--</div>-->
               <div class="form-group">
-                <label for="inputTunnus" class="col-md-2 control-label">Käyttäjätunnus: </label>
-                <input type="text" class="form-control" id="inputTunnus" placeholder="Käyttäjätunnus"> 
-              </div>
-              <div class="form-group">
-                <label for="inputSalasana" class="col-md-2 control-label">Salasana: </label>
-                <input type="text" class="form-control" id="inputSalasana" placeholder="Salasana"> 
+                <label for="salasana" class="col-md-2 control-label">Salasana: </label>
+                <input type="password" class="form-control" name="salasana" placeholder="Salasana"> 
               </div> 
-              <div class="form-group">
+              <!--<div class="form-group">-->
                 <div class="col-md-offset-2 col-md-10">
                   <button type="submit" class="btn btn-default">Kirjaudu sisään</button>
                 </div>
-              </div>
-              <div class="form-group">
+              <!--</div>-->
+              <!--<div class="form-group">-->
                   <p>Jos olet uusi käyttäjä, sinun täytyy ensin <a href="rekisteroityminen.html">rekisteröityä.</a></p>              
-              </div>                
+              <!--</div>-->                
             </form>
           </div>
      
