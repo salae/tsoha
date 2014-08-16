@@ -1,5 +1,10 @@
 <?php 
-  require 'views/kirjautuminen.php';  
+//  require 'views/kirjautuminen.php';  
+
+  $sivu ="kirjautuminen";
+  
+  require_once 'libs/common.php';
+  naytaNakyma($sivu);
   
    /*  Lomakkeen vastaanottaminen  */
 //
