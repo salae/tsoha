@@ -1,5 +1,7 @@
 <?php
 
+  require_once 'libs/common.php';
+
   /*  Lomakkeen vastaanottaminen  */
 
   if (empty($_POST["tunnus"]) || empty($_POST["salasana"])) {
@@ -13,7 +15,7 @@
   /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
   if ("outolio" == $kayttaja && "12345" == $salasana) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
-    header('Location: index.php');
+    header('Location: kurssit.php');
   } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("kirjautuminen",  array(
