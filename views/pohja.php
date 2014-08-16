@@ -50,6 +50,10 @@
            */
    
            include 'views/'.$sivu.'.php'; 
+           
+           if (!empty($data->virhe)): ?>
+           <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
+           <?php endif;
 
 //           include 'views/testi1.php'; 
 //           include 'testi2.php'; 
