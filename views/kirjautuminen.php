@@ -36,7 +36,7 @@
       
       <!-- varsinainen sisältö  -->      
       
-          <div class="col-md-9">
+          <div class="col-md-6">
             <h2>Kirjautuminen</h2>
             
             <form class="form-horizonal" role="form" action="kirjaudu.php" method="POST">
