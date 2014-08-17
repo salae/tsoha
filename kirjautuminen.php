@@ -1,7 +1,9 @@
 <?php 
 
+  require_once 'libs/common.php';
+   
   $sivu ="kirjautuminen";
   
-  require_once 'libs/common.php';
+ 
   naytaNakyma($sivu);
   

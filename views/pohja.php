@@ -26,6 +26,8 @@
                 <span>Kirjautunut</span>
                 <button type="submit">Kirjaudu ulos</button>             
               </form><?php
+            elseif ($sivu == "kirjautuminen"):
+              ?><p></p><?php              
             else:
                ?><p><a href="kirjautuminen.php">Kirjaudu</a></p><?php
               endif;           
