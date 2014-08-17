@@ -22,11 +22,19 @@
   }
   $salasana = $_POST["salasana"];  
   
+  /*  Otetaan istunto käyttöön  */
+  session_start();
+  
+  $koekayttaja = Henkilo::etsiKayttajaTunnuksilla($kayttaja, $salasana);
+  
   /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
  
-  if ( Henkilo::etsiKayttajaTunnuksilla($kayttaja,$salasana) != null) {
-    /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kurssilistaan. */
-    header('Location: kurssit.php');
+  if ( $koekayttaja != null) {
+    /* Jos tunnus on oikea, tallennetaan istuntoon käyttäjäoloio ja 
+     * ohjataan käyttäjä sopivalla HTTP-otsakkeella kurssilistaan. */
+    $_SESSION['kirjautunut'] = $koekayttaja;
+
+    header('Location: index.php');
   } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("kirjautuminen",  array(

@@ -1,9 +1,8 @@
 <?php
   require_once 'libs/common.php';
 
-  $sivu ="kurssit"; 
+  $sivu ="kysymykset";  
 
   if(onkoKirjautunut()){
     naytaNakyma($sivu);
   }
-

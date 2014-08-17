@@ -11,12 +11,27 @@
   <body>
     <div class="container-fluid">
       
-      <!--  yläreunaan tulee kirjautuminen -->
+      <!--  yläreunaan tulee kirjautuminen 
+            yritetään ottaa kirjautumistilanne huomioon uudessa versiossa 
+            vähän vielä bugittaa
+      -->
       
       <div class="row">      
           <div class="col-md-3  col-md-offset-9">
-            <p><a href="kirjautuminen.php">Kirjaudu</a> / <a href="">Kirjaudu ulos</a></p>
+          <?php           
+           if(isset($_SESSION['kirjautunut'])): ?> 
+            
+              <!--  Poiskirjautuminen-->
+              <form class="form-inline" action="kirjauduUlos.php" method="POST">
+                <span>Kirjautunut</span>
+                <button type="submit">Kirjaudu ulos</button>             
+              </form><?php
+            else:
+               ?><p><a href="kirjautuminen.php">Kirjaudu</a></p><?php
+              endif;           
+          ?>
           </div>
+
       </div> 
       
       <!-- sovellusohjelman otsikko  -->

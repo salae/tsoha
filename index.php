@@ -1,5 +1,6 @@
 <?php
 
+
 //  $sivu ="views/aloitus.php";
   $sivu ="aloitus";
   

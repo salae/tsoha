@@ -1,7 +1,9 @@
 <?php
+  require_once 'libs/common.php';
 
   $sivu ="henkilot";
-  
-  require_once 'libs/common.php';
-  naytaNakyma($sivu);
+
+  if(onkoKirjautunut()){
+    naytaNakyma($sivu);
+  }
 
