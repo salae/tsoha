@@ -2,7 +2,7 @@
 
   //require_once sisällyttää annetun tiedoston vain kerran
   require_once "libs/tietokantayhteys.php"; 
-
+  
   $sql = "SELECT etunimi, sukunimi FROM Henkilo";
   $kysely = getTietokantayhteys()->prepare($sql);
   $kysely->execute(); 

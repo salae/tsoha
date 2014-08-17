@@ -1,4 +1,3 @@
-<div class="col-md-9">
   <h2>Kurssit</h2>
 
   <table class="table table-striped">
@@ -47,4 +46,3 @@
    <p>
     Lisää <a href="lisaakurssi.html">uusi kurssi</a>.
    </p> 
-</div>

@@ -1,4 +1,3 @@
-   <div class="col-md-9">
       <h2>Käyttäjät</h2>
       <table class="table table-striped">
         <thead>
@@ -15,7 +14,7 @@
           <tr>
             <td>1</td>
             <td><a href="muokkaahenkilo.html">Muikku, Mikko</a></td>
-            <td>mikma</td>
+            <td>mikmu</td>
             <td>Matematiikka ja tilastotiede</td>
             <td>-</td>
             <td><button type="submit" class="btn btn-default">Poista</button></td>
@@ -44,4 +43,3 @@
       <p>
         Luo uusi henkilö <a href="rekisteroityminen.html">reskisteröintisivulla</a>.
       </p>
-    </div>

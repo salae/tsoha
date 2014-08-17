@@ -1,9 +1,10 @@
 <?php
 
   require_once 'libs/common.php';
+//  include_once 'libs/models/Henkilo.php'; 
+  include_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
 
   /*  Lomakkeen vastaanottaminen  */
-
  
   //Tarkistetaan että vaaditut kentät on täytetty:
   if (empty($_POST["tunnus"])) {
@@ -19,11 +20,11 @@
       'virhe' => "Kirjautuminen epäonnistui! Et antanut salasanaa.",
     ));
   }
-  $salasana = $_POST["salasana"];
-  
+  $salasana = $_POST["salasana"];  
   
   /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
-  if ("outolio" == $kayttaja && "12345" == $salasana) {
+ 
+  if ( Henkilo::etsiKayttajaTunnuksilla($kayttaja,$salasana) != null) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kurssilistaan. */
     header('Location: kurssit.php');
   } else {

@@ -33,7 +33,7 @@
 
           <div class="col-md-2">
               <ul class="nav">
-                  <li class="active"><a href="index.php">Etusivu</a></li>
+                  <li><a href="index.php">Etusivu</a></li>
                   <li><a href="kurssit.php">Kurssit</a></li>
                   <li><a href="kysymykset.php">Kysymykset</a></li>
                   <li><a href="henkilot.php">Käyttäjät</a></li>
@@ -54,14 +54,9 @@
 
              if (!empty($data->virhe)): ?>
              <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-             <?php endif;
-
-  //           include 'views/testi1.php'; 
-  //           include 'testi2.php'; 
-  //           include 'http://aesalmin.users.cs.helsinki.fi/Kurssikysely/views/testi3.php'; 
-          ?>
-      
+             <?php endif; ?>      
            </div>
+      
         </div> 
       </div> 
    </body>
