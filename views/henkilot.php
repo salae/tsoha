@@ -8,6 +8,7 @@
             <th>Laitos</th>
             <th>Admin</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -19,7 +20,10 @@
             <td><?php echo htmlspecialchars($kayttaja->getTunnus()); ?></td>
             <td><?php echo htmlspecialchars($kayttaja->getLaitos()); ?></td>
             <td><?php echo htmlspecialchars($kayttaja->onkoYllapitaja()); ?></td>
-            <td><form class="form-inline" action="poistaHenkilo.php" method="POST">
+            <td><form class="" action="henkiloMuokkaus.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $kayttaja->getId(); ?>">
+                <button type="submit">Muokkaa</button></form></td>
+            <td><form class="" action="poistaHenkilo.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $kayttaja->getId(); ?>">
                 <button type="submit">Poista</button></form></td>
           </tr>

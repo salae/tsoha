@@ -58,11 +58,6 @@ class Henkilo {
   
   public function setId($id) {
       $this->id = $id;
-      if(!is_numeric($id)) {
-        $this->virheet['id'] = "Id:n pitää olla numero.";
-      } else { 
-      unset($this->virheet['id']);
-      }
   }
 
   public function setEtunimi($etunimi) {    
