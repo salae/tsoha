@@ -85,7 +85,7 @@ class Henkilo {
   public function setTunnus($tunnus) {
     $this->tunnus = $tunnus;
     if(trim($this->tunnus) == '') {
-      $this->virheet['tunnus'] = "Tunnus ei saa olla tyhjä.";
+      $this->virheet['tunnus'] = "Käyttäjätunnus ei saa olla tyhjä.";
     } else { 
       unset($this->virheet['tunnus']);
     }      

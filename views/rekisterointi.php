@@ -8,12 +8,12 @@
           </div>   
           <div class="form-group">
             <label for="sukunimi" class="col-md-2 control-label">Sukunimi: </label>
-            <input type="text" class="form-control" name="sukunimi" placeholder="Sukunimi"
+            <input type="text" class="form-control" name="sukunimi" 
                    value="<?php echo htmlspecialchars($data->henkilo->getSukunimi()); ?>"> 
           </div>              
           <div class="form-group">
             <label for="tunnus" class="col-md-2 control-label">Käyttäjätunnus: </label>
-            <input type="text" class="form-control" name="tunnus" placeholder="Käyttäjätunnus"
+            <input type="text" class="form-control" name="tunnus" 
                    value="<?php echo htmlspecialchars($data->henkilo->getTunnus()); ?>"> 
           </div>
           <div class="form-group">
@@ -23,7 +23,7 @@
           </div> 
           <div class="form-group">
             <label for="laitos" class="col-md-2 control-label">Laitos: </label>
-            <input type="text" class="form-control" name="laitos" placeholder="Laitos"
+            <input type="text" class="form-control" name="laitos" 
                    value="<?php echo htmlspecialchars($data->henkilo->getLaitos()); ?>"> 
           </div> 
           <div class="form-group">

@@ -1,5 +1,6 @@
 <?php  
   require_once 'libs/common.php';
- session_start();  //tällä sivulla tässä luuppi-ongelmien takia
+  session_start();  
+  
   naytaNakyma("aloitus", array('kayttaja'=>$_SESSION['kirjautunut']));
   

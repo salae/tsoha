@@ -73,9 +73,29 @@
            </div>
     </div>
       <div class="row">
+        
+      <!--  erilaisia viestejä ja virheilmoituksia-->
+      
       <?php if (!empty($data->virhe)): ?>
              <div class="alert alert-danger col-md-offset-2"><?php echo $data->virhe; ?></div>
-             <?php endif; ?>
+           <?php elseif (!empty($data->virheet)) : 
+               foreach ($data->virheet as $erhe): ?>
+                 <div class="alert alert-danger col-md-offset-2">
+                     <?php echo $erhe.". "; ?>
+                 </div><?php endforeach;
+            elseif (!empty($data->viesti)): ?>
+                <div class="alert alert-danger col-md-offset-2">
+                 <?php echo $data->viesti; ?>
+             </div><?php            
+           elseif (!empty($_SESSION['ilmoitus'])): ?>
+             <div class="alert alert-danger col-md-offset-2">
+                <?php echo $_SESSION['ilmoitus']; ?>
+             </div>
+             <?php
+                // Samalla kun viesti näytetään, se poistetaan istunnosta,
+                // ettei se näkyisi myöhemmin jollain toisella sivulla uudestaan.
+                unset($_SESSION['ilmoitus']);                                
+             endif; ?>
     
       
         </div> 
