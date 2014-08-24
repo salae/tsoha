@@ -1,5 +1,4 @@
 <?php
-
 require_once "libs/tietokantayhteys.php"; 
 
 class Henkilo {
@@ -14,7 +13,7 @@ class Henkilo {
   private $virheet = array();
   
   public function __construct($id, $etunimi, $sukunimi, $tunnus, $salasana, $laitos, $yllapitaja) {
-    $this->id = $id; //tätää pitänee vielä miettiä
+    $this->setId($id);
     $this->setEtunimi($etunimi);
     $this->setSukunimi($sukunimi);
     $this->setTunnus($tunnus);
@@ -56,13 +55,15 @@ class Henkilo {
   public function getVirheet() {
     return $this->virheet;
   }
-
-
   
-// tätä ei tarvita mihinkään vai?
-//  public function setId($id) {
-//      $this->id = $id;
-//  }
+  public function setId($id) {
+      $this->id = $id;
+      if(!is_numeric($id)) {
+        $this->virheet['id'] = "Id:n pitää olla numero.";
+      } else { 
+      unset($this->virheet['id']);
+      }
+  }
 
   public function setEtunimi($etunimi) {    
     $this->etunimi = $etunimi;
@@ -119,7 +120,7 @@ class Henkilo {
   /* Etsitään kannasta käyttäjä pääavaimen perusteella */
   
   public static function etsiKayttaja($id) {
-    $sql = "SELECT etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
+    $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
             . "FROM Henkilo WHERE id = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
     $kysely->execute(array($id));
@@ -131,8 +132,7 @@ class Henkilo {
         $kayttaja = new Henkilo($tulos->id,$tulos->etunimi,$tulos->sukunimi,
            $tulos->tunnus, $tulos->salasana,$tulos->laitos,$tulos->yllapitaja);
         return $kayttaja;
-    }
-    
+    }    
   }
 
   /* Etsitään kannasta käyttäjä käyttäjätunnuksen ja salasanan perusteella */
@@ -167,6 +167,32 @@ class Henkilo {
     if ($ok) {
         $this->id = $kysely->fetchColumn();
     }
+    return $ok;    
+  }
+  
+  /* Poista henkilö tietokannasta  */
+  
+  public function poistaKannasta() {
+    $sql = "DELETE FROM Henkilo WHERE id = ?";
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $ok = $kysely->execute(array($this->getId()));
+    
+    return $ok;
+  }
+  
+  /* Muokataan henkilön tietoja */ 
+  
+    public function muokkaaTietoja() {
+    $sql = "UPDATE Henkilo SET etunimi = ?, sukunimi = ?, tunnus =? , salasana = ?, "
+            . "laitos = ? WHERE id = ?";
+    $kysely = getTietokantayhteys()->prepare($sql);
+
+    $ok = $kysely->execute(array($this->getEtunimi(), $this->getSukunimi(),
+        $this->getTunnus(), $this->getSalasana(),$this->getLaitos(), $this->getId()));
+//
+//    if ($ok) {
+//        $this->id = $kysely->fetchColumn();
+//    }
     return $ok;    
   }
   

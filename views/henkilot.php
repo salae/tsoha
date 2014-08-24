@@ -13,12 +13,15 @@
         <tbody>
         <?php foreach($data->kayttajat as $kayttaja): ?>
           <tr>
-            <td><a href="henkilonTiedot.php?id=<?php echo $kayttaja->getID() ?>"> 
+            <td><a href="henkilonTiedot.php?id=<?php echo $kayttaja->getId() ?>"> 
               <?php echo htmlspecialchars($kayttaja->getSukunimi().", "
                       .$kayttaja->getEtunimi()); ?></a></td>
             <td><?php echo htmlspecialchars($kayttaja->getTunnus()); ?></td>
             <td><?php echo htmlspecialchars($kayttaja->getLaitos()); ?></td>
             <td><?php echo htmlspecialchars($kayttaja->onkoYllapitaja()); ?></td>
+            <td><form class="form-inline" action="poistaHenkilo.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $kayttaja->getId(); ?>">
+                <button type="submit">Poista</button></form></td>
           </tr>
         <?php endforeach; ?>                 
         </tbody>
