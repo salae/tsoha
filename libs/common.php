@@ -15,7 +15,7 @@
 //      $kayttaja = $_SESSION['kayttaja'];
       return true;
     }  else {
-      header('Location: index.php');
+      header('Location: kirjautuminen.php');
       return false;
     }
     

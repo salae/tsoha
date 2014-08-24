@@ -1,8 +1,8 @@
 <?php
 
-$yhteys = new PDO("pgsql:");
+//$yhteys = new PDO("pgsql:");
 
-$yhteys->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+//$yhteys->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 /** Funktio joka palauttaa yhteyden tietokantaan PDO-oliona. */
 function getTietokantayhteys() {

@@ -1,8 +1,8 @@
-      <h2>Käyttäjät</h2>
+    <h2>Käyttäjät</h2>           
+      
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
             <th>Henkilön nimi</th>
             <th>Tunnus</th>
             <th>Laitos</th>
@@ -11,35 +11,19 @@
           </tr>
         </thead>
         <tbody>
+        <?php foreach($data->kayttajat as $kayttaja): ?>
           <tr>
-            <td>1</td>
-            <td><a href="muokkaahenkilo.html">Muikku, Mikko</a></td>
-            <td>mikmu</td>
-            <td>Matematiikka ja tilastotiede</td>
-            <td>-</td>
-            <td><button type="submit" class="btn btn-default">Poista</button></td>
-          </tr>  
-          <tr>
-            <td>2</td>
-            <td><a href="#">Olio, Outi</a></td>
-            <td>outolio</td>
-            <td>Tietojenkäsittelytiede</td>
-            <td>+</td>
-            <td><button type="submit" class="btn btn-default">Poista</button>
-            </td>
-          </tr> 
-          <tr>
-            <td>3</td>
-            <td><a href="#">Tutkija, Tiina</a></td>
-            <td>tiitu</td>
-            <td>Kemia</td>
-            <td>+</td>
-            <td> <button type="submit" class="btn btn-default">Poista</button>
-            </td>
-          </tr>                
+            <td><a href="henkilonTiedot.php?id=<?php echo $kayttaja->getID() ?>"> 
+              <?php echo htmlspecialchars($kayttaja->getSukunimi().", "
+                      .$kayttaja->getEtunimi()); ?></a></td>
+            <td><?php echo htmlspecialchars($kayttaja->getTunnus()); ?></td>
+            <td><?php echo htmlspecialchars($kayttaja->getLaitos()); ?></td>
+            <td><?php echo htmlspecialchars($kayttaja->onkoYllapitaja()); ?></td>
+          </tr>
+        <?php endforeach; ?>                 
         </tbody>
       </table> 
 
       <p>
-        Luo uusi henkilö <a href="rekisteroityminen.html">reskisteröintisivulla</a>.
+        Luo uusi henkilö <a href="rekisterointi.php">reskisteröintisivulla</a>.
       </p>

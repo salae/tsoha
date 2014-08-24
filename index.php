@@ -1,9 +1,5 @@
-<?php
-
-
-//  $sivu ="views/aloitus.php";
-  $sivu ="aloitus";
-  
+<?php  
   require_once 'libs/common.php';
-  naytaNakyma($sivu);
+ session_start();  //tällä sivulla tässä luuppi-ongelmien takia
+  naytaNakyma("aloitus", array('kayttaja'=>$_SESSION['kirjautunut']));
   

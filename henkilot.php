@@ -1,9 +1,11 @@
 <?php
   require_once 'libs/common.php';
+  require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
+  
+  $kayttajat = Henkilo::etsiKaikkiKayttajat();
 
-  $sivu ="henkilot";
 
   if(onkoKirjautunut()){
-    naytaNakyma($sivu);
+    naytaNakyma("henkilot",array('kayttajat'=> $kayttajat, 'kayttaja'=>$_SESSION['kirjautunut']));
   }
 

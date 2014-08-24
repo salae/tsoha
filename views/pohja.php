@@ -23,10 +23,10 @@
             
               <!--  Poiskirjautuminen-->
               <form class="form-inline" action="kirjauduUlos.php" method="POST">
-                <span>Kirjautunut</span>
+                <span> on kirjautunut</span>
                 <button type="submit">Kirjaudu ulos</button>             
               </form><?php
-            elseif ($sivu == "kirjautuminen"):
+            elseif ($sivu == "kirjautuminen" || $sivu == "rekisterointi"):
               ?><p></p><?php              
             else:
                ?><p><a href="kirjautuminen.php">Kirjaudu</a></p><?php
@@ -69,10 +69,14 @@
 
              include 'views/'.$sivu.'.php'; 
 
-             if (!empty($data->virhe)): ?>
-             <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-             <?php endif; ?>      
+            ?>      
            </div>
+    </div>
+      <div class="row">
+      <?php if (!empty($data->virhe)): ?>
+             <div class="alert alert-danger col-md-offset-2"><?php echo $data->virhe; ?></div>
+             <?php endif; ?>
+    
       
         </div> 
       </div> 

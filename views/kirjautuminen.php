@@ -19,5 +19,5 @@
     </form>    
 
     <div >
-        <p>Jos olet uusi käyttäjä, sinun täytyy ensin <a href="rekisteroityminen.php">rekisteröityä.</a></p>              
+        <p>Jos olet uusi käyttäjä, sinun täytyy ensin <a href="rekisterointi.php">rekisteröityä.</a></p>              
     </div>            
