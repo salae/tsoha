@@ -97,8 +97,6 @@ class Henkilo {
   }
 
   public function setLaitos($laitos) {
-    //tätä pitää vähän vielä miettiä. Tyhjähän tää saa olla.
-    //Pitäisiköhän lisätä oma taulu näille?
     trim($laitos);
     $this->laitos = $laitos;    
   }
@@ -115,8 +113,8 @@ class Henkilo {
   /* Etsitään kannasta käyttäjä pääavaimen perusteella */
   
   public static function etsiKayttaja($id) {
-    $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
-            . "FROM Henkilo WHERE id = ? LIMIT 1";
+    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
+            . "FROM Henkilo JOIN Laitos ON Henkilo.laitos=Laitos.id WHERE Henkilo.id = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
     $kysely->execute(array($id));
     
@@ -194,8 +192,8 @@ class Henkilo {
    /* Etsitään kannasta kaikki käyttäjät  */
   
     public static function etsiKaikkiKayttajat() {
-      $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
-              . "FROM Henkilo ORDER BY sukunimi, etunimi, tunnus" ;
+      $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
+              . "FROM Henkilo LEFT OUTER JOIN Laitos ON Henkilo.laitos = Laitos.id ORDER BY sukunimi, etunimi, tunnus" ;
       $kysely = getTietokantayhteys()->prepare($sql);
       $kysely->execute();
 
@@ -213,5 +211,5 @@ class Henkilo {
   public function onkoKelvollinen() {
     return empty($this->virheet);
   }
-  
+
 }

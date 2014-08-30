@@ -11,6 +11,7 @@
   
   function onkoKirjautunut() {
     session_start();
+    
     if (isset($_SESSION['kirjautunut'])){
 //      $kayttaja = $_SESSION['kayttaja'];
       return true;

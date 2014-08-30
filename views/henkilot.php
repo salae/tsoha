@@ -32,5 +32,5 @@
       </table> 
 
       <p>
-        Luo uusi henkilö <a href="rekisterointi.php">reskisteröintisivulla</a>.
+        Lisää uusi käyttäjä <a href="rekisterointi.php">reskisteröintisivulla</a>.
       </p>

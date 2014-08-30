@@ -11,19 +11,15 @@
   <body>
     <div class="container-fluid">
       
-      <!--  yläreunaan tulee kirjautuminen 
-            yritetään ottaa kirjautumistilanne huomioon uudessa versiossa 
-            vähän vielä bugittaa
-      -->
+      <!--  yläreunassa tietoja kirjautumisesta ja mahdollisuus kirjautua   -->
       
       <div class="row">      
           <div class="col-md-3  col-md-offset-9">
           <?php           
-           if(isset($_SESSION['kirjautunut'])): ?> 
-            
+           if(isset($_SESSION['kirjautunut'])): ?>             
               <!--  Poiskirjautuminen-->
               <form class="form-inline" action="kirjauduUlos.php" method="POST">
-                <span> on kirjautunut</span>
+                <span><?php echo $_SESSION['kirjautunut']->getTunnus() ; ?> on kirjautunut</span>
                 <button type="submit">Kirjaudu ulos</button>             
               </form><?php
             elseif ($sivu == "kirjautuminen" || $sivu == "rekisterointi"):
@@ -33,7 +29,6 @@
               endif;           
           ?>
           </div>
-
       </div> 
       
       <!-- sovellusohjelman otsikko  -->
@@ -44,7 +39,7 @@
           </div>
       </div>  
       
-    <div class="row"> 
+      <div class="row"> 
       
       <!-- Sivupalkki navivgaatiolle  -->      
 
@@ -56,48 +51,41 @@
                   <li><a href="henkilot.php">Käyttäjät</a></li>
                   <li><a href="raportit.php">Raportit</a></li> 
               </ul>
-            </div> 
+          </div> 
       
-      <!-- varsinainen sisältö  -->   
+      <!-- varsinainen sisältö joka haetaan näkymätiedostosta  -->   
       
-        <div class="col-md-10">
-          <?php 
-            /* HTML-rungon keskellä on sivun sisältö, 
-             * joka haetaan sopivasta näkymätiedostosta.
-             * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
-             */
-
-             include 'views/'.$sivu.'.php'; 
-
-            ?>      
-           </div>
-    </div>
+          <div class="col-md-10">
+          <?php include 'views/'.$sivu.'.php';  ?>      
+          </div>
+      </div>
+      
       <div class="row">
         
       <!--  erilaisia viestejä ja virheilmoituksia-->
       
-      <?php if (!empty($data->virhe)): ?>
-             <div class="alert alert-danger col-md-offset-2"><?php echo $data->virhe; ?></div>
-           <?php elseif (!empty($data->virheet)) : 
+         <?php if (!empty($data->virhe)): ?>
+           <div class="alert alert-danger col-md-offset-2">
+             <?php echo $data->virhe; ?>
+           </div>
+         <?php elseif (!empty($data->virheet)) : 
                foreach ($data->virheet as $erhe): ?>
                  <div class="alert alert-danger col-md-offset-2">
                      <?php echo $erhe.". "; ?>
                  </div><?php endforeach;
-            elseif (!empty($data->viesti)): ?>
-                <div class="alert alert-danger col-md-offset-2">
+           elseif (!empty($data->viesti)): ?>
+              <div class="alert alert-danger col-md-offset-2">
                  <?php echo $data->viesti; ?>
-             </div><?php            
+              </div><?php            
            elseif (!empty($_SESSION['ilmoitus'])): ?>
-             <div class="alert alert-danger col-md-offset-2">
-                <?php echo $_SESSION['ilmoitus']; ?>
-             </div>
+              <div class="alert alert-danger col-md-offset-2">
+                 <?php echo $_SESSION['ilmoitus']; ?>
+              </div>
              <?php
                 // Samalla kun viesti näytetään, se poistetaan istunnosta,
                 // ettei se näkyisi myöhemmin jollain toisella sivulla uudestaan.
                 unset($_SESSION['ilmoitus']);                                
-             endif; ?>
-    
-      
+             endif; ?>      
         </div> 
       </div> 
    </body>

@@ -3,43 +3,32 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>#</th>
         <th>Kurssin nimi</th>
         <th>Aloituspäivä</th>
         <th>Loppumispäivä</th>
         <th>Järjestävä laitos</th>
         <th>Kysely</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
+    <?php foreach($data->kurssit as $kurssi): ?>
        <tr>
-        <td>1</td> 
-        <td><a href="muokkaakurssi.html">Logiikka I</a></td>
-        <td>14.1.2015</td>
-        <td>31.5.2015</td>
-        <td>Matematiikka ja tilastotiede</td>
-        <td>-</td>
-        <td><button type="submit" class="btn btn-default">Poista</button></td>
+        <td><a href="kurssinTiedot.php?id=<?php echo $kurssi->getId() ?>"> 
+              <?php echo htmlspecialchars($kurssi->getNimi()); ?></a></td>
+        <td><?php echo var_dump(htmlspecialchars($kurssi->getAlkuPvm())); ?></td>
+        <td><?php echo var_dump(htmlspecialchars($kurssi->getLoppuPvm())); ?></td> 
+        <td><?php echo htmlspecialchars($kurssi->getLaitos()); ?></td>
+        <td><?php echo htmlspecialchars($kurssi->getKysely_aktiivinen()); ?></td>
+        <td><form class="" action="kurssiMuokkaus.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $kurssi->getId(); ?>">
+                <button type="submit">Muokkaa</button></form></td>
+            <td><form class="" action="poistaKurssi.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $kurssi->getId(); ?>">
+                <button type="submit">Poista</button></form></td>
       </tr> 
-      <tr>
-        <td>2</td>
-        <td><a href="#">Biologinen kemia</a></td>
-        <td>4.8.2014</td>
-        <td>15.9.2014</td>
-        <td>Kemia</td>
-        <td>aktiivinen</td>
-        <td><button type="submit" class="btn btn-default">Poista</button></td>
-      </tr>                  
-      <tr>
-        <td>3</td>
-        <td><a href="#">Ohjelmoinnin perusteet</a></td>
-        <td>1.9.2013</td>
-        <td>14.12.2013</td>
-        <td>Tietojenkäsittelytiede</td>
-        <td>mennyt</td>
-        <td><button type="submit" class="btn btn-default">Poista</button></td>
-      </tr>          
+      <?php endforeach; ?> 
     </tbody>
   </table>  
 
