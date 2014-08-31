@@ -14,7 +14,7 @@ class Kysymys {
     function __construct($id, $kysymys, $vastausLaji, $kaikille, $laitos, $vaihtoehdot) {
       $this->id = $id;
       $this->kysymys = $kysymys;
-      $this->vastausLaji = $vastausLaji;
+      $this->vastausLaji = intval($vastausLaji);
       $this->kaikille = $kaikille;
       $this->laitos = $laitos;
       $this->vaihtoehdot = $vaihtoehdot;
@@ -31,7 +31,8 @@ class Kysymys {
     }
 
     public function getVastausLaji() { 
-      if(intval($this->vastausLaji) == 1) {
+//      return $this->vastausLaji;
+      if($this->vastausLaji == '1') {
         return "teksti";
       } elseif ($this->vastausLaji == 2) {
         return "0-5";
@@ -83,13 +84,13 @@ class Kysymys {
       $sql = "SELECT Kysymys.id AS id, kysymys, vastlaji, kaikille, Laitos.nimi AS laitos,vaihtoehdot "
               . "FROM Kysymys LEFT OUTER JOIN Laitos ON Kysymys.laitos=Laitos.id "
               . "ORDER BY kysymys" ;
-      $kysely = getTietokantayhteys()->prepare($sql);
+      $kysely = getTietokantayhteys()->prepare($sql);      
       $kysely->execute();
 
       $tulokset = array();
       foreach($kysely->fetchAll() as $tulos) {
-        $kysymys = new Kysymys($tulos[id],$tulos[kysymys],  var_dump($tulos[vastLaji]),
-                $tulos[kaikille], $tulos[laitos], $tulos[vaihtoehdot]);       
+        $kysymys = new Kysymys($tulos['id'],$tulos['kysymys'], $tulos['vastlaji'],
+                $tulos['kaikille'], $tulos['laitos'], $tulos['vaihtoehdot']);       
 
         $tulokset[] = $kysymys;
     }

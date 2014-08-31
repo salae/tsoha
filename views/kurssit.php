@@ -17,8 +17,8 @@
        <tr>
         <td><a href="kurssinTiedot.php?id=<?php echo $kurssi->getId() ?>"> 
               <?php echo htmlspecialchars($kurssi->getNimi()); ?></a></td>
-        <td><?php echo var_dump(htmlspecialchars($kurssi->getAlkuPvm())); ?></td>
-        <td><?php echo var_dump(htmlspecialchars($kurssi->getLoppuPvm())); ?></td> 
+        <td><?php echo htmlspecialchars($kurssi->getAlkuPvm()->format('d.m.Y')); ?></td>
+        <td><?php echo htmlspecialchars($kurssi->getLoppuPvm()->format('d.m.Y')); ?></td> 
         <td><?php echo htmlspecialchars($kurssi->getLaitos()); ?></td>
         <td><?php echo htmlspecialchars($kurssi->getKysely_aktiivinen()); ?></td>
         <td><form class="" action="kurssiMuokkaus.php" method="POST">
@@ -33,5 +33,5 @@
   </table>  
 
    <p>
-    Lisää <a href="lisaakurssi.html">uusi kurssi</a>.
+     Lisää <a href="kurssinLisays.php">uusi kurssi</a>.
    </p> 

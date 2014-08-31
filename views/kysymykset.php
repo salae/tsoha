@@ -3,9 +3,10 @@
       <thead>
         <tr>
           <th>Kysymys</th>          
-          <th>Vastausyyppi</th>
-          <th>Laajuus</th>
+          <th>Vastauslaji</th>
+          <th>Kaikille</th>
           <th>Laitos</th>
+          <th>Vaihtoehdot</th>
           <th></th>
           <th></th>
         </tr>
@@ -18,6 +19,7 @@
           <td><?php echo htmlspecialchars($kysymys->getVastausLaji()); ?></td>
           <td><?php echo htmlspecialchars($kysymys->getKaikille()); ?></td>
           <td><?php echo htmlspecialchars($kysymys->getLaitos()); ?></td>
+          <td><?php echo htmlspecialchars($kysymys->getVaihtoehdot()); ?></td>
         </tr>
       <?php endforeach; ?>  
       </tbody>
