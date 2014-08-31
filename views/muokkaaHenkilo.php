@@ -24,8 +24,13 @@
           </div> 
           <div class="form-group">
             <label for="laitos" class="col-md-2 control-label">Laitos: </label>
-            <input type="text" class="form-control" name="laitos" 
-                   value="<?php echo htmlspecialchars($data->henkilo->getLaitos()); ?>"> 
+            <select name="laitos">
+              <option value=0>-</option>
+              <?php foreach(Laitos::haeKaikki() as $tdk_laitos): ?> 
+              <option value="<?php echo $tdk_laitos->getId(); ?>">
+              <?php echo $tdk_laitos->getNimi(); ?></option>
+              <?php endforeach; ?>
+            </select>
           </div> 
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

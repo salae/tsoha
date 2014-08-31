@@ -2,10 +2,17 @@
   require_once 'libs/common.php';
   include_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Laitos.php';
+  
     /*  Lomakkeen vastaanottaminen  */
   
-  $muokattuKayttaja = new Henkilo(null,$_POST["etunimi"], $_POST["sukunimi"], 
-          $_POST["tunnus"], $_POST["salasana"], $_POST["laitos"], FALSE);  
+  $muokattuKayttaja = new Henkilo();
+  $muokattuKayttaja->setId($_POST["id"]);
+  $muokattuKayttaja->setEtunimi($_POST["etunimi"]);
+  $muokattuKayttaja->setSukunimi($_POST["sukunimi"]);
+  $muokattuKayttaja->setTunnus($_POST["tunnus"]);
+  $muokattuKayttaja->setSalasana($_POST["salasana"]);
+  $muokattuKayttaja->setLaitos($_POST["laitos"]);
+          
 
   if($muokattuKayttaja->onkoKelvollinen()) {
       $muokattuKayttaja->lisaaKantaan();

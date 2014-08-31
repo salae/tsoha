@@ -12,13 +12,13 @@ class Kurssi {
     private $kysely_aktiivinen; 
     
     public function __construct($id, $nimi, $opettaja, $alkuPvm, $loppuPvm, $laitos, $kysely_aktiivinen) {
-        $this->setId($id);
-        $this->setNimi($nimi);
-        $this->setOpettaja($opettaja);
-        $this->setAlkuPvm($alkuPvm);
-        $this->setLoppuPvm($loppuPvm);
-        $this->setLaitos($laitos);
-        $this->setKysely_aktiivinen($kysely_aktiivinen);
+      $this->id = $id;
+      $this->nimi = $nimi;
+      $this->opettaja = $opettaja;
+      $this->alkuPvm = $alkuPvm;
+      $this->loppuPvm = $loppuPvm;
+      $this->laitos = $laitos;
+      $this->kysely_aktiivinen = $kysely_aktiivinen;
     }
 
     // getterit ja setterit

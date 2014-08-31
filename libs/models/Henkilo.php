@@ -12,16 +12,16 @@ class Henkilo {
   private $yllapitaja;  //totta tai ei, oikeuksista kyse
   private $virheet = array();
   
-  public function __construct($id, $etunimi, $sukunimi, $tunnus, $salasana, $laitos, $yllapitaja) {
-    $this->setId($id);
-    $this->setEtunimi($etunimi);
-    $this->setSukunimi($sukunimi);
-    $this->setTunnus($tunnus);
-    $this->setSalasana($salasana);
-    $this->setLaitos($laitos);
-    $this->setYllapitaja($yllapitaja);
+  function __construct($id, $etunimi, $sukunimi, $tunnus, $salasana, $laitos, $yllapitaja) {
+    $this->id = $id;
+    $this->etunimi = $etunimi;
+    $this->sukunimi = $sukunimi;
+    $this->tunnus = $tunnus;
+    $this->salasana = $salasana;
+    $this->laitos = $laitos;
+    $this->yllapitaja = $yllapitaja;    
   }
-  
+
   // getterit ja setterit
   
   public function getId() {
@@ -45,6 +45,9 @@ class Henkilo {
   }
 
   public function getLaitos() {
+    if($this->laitos == '0'){
+      return null;
+    }
       return $this->laitos;
   }
 
@@ -132,8 +135,8 @@ class Henkilo {
   
   public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {    
  
-    $sql = "SELECT id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
-            . "from Henkilo where tunnus = ? AND salasana = ? LIMIT 1";
+    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
+            . "from Henkilo JOIN Laitos ON Henkilo.laitos=Laitos.id where tunnus = ? AND salasana = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
     $kysely->execute(array($kayttaja, $salasana));
 

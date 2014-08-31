@@ -8,13 +8,13 @@ class Vastaus {
   private $k_kysymys;
   
   function __construct($id, $teksti, $arvo, $k_kysymys) {
-    $this->setId($id);
-    $this->setTeksti($teksti);
-    $this->setArvo($arvo);    
-    $this->setK_kysymys($k_kysymys);
+    $this->id = $id;
+    $this->teksti = $teksti;
+    $this->arvo = $arvo;
+    $this->k_kysymys = $k_kysymys;
   }
 
-  public function getId() {
+    public function getId() {
     return $this->id;
   }
 

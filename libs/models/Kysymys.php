@@ -12,15 +12,15 @@ class Kysymys {
     private $virheet = array();
     
     function __construct($id, $kysymys, $vastausLaji, $kaikille, $laitos, $vaihtoehdot) {
-        $this->setId($id);
-        $this->setKysymys($kysymys);
-        $this->setVastausLaji($vastausLaji);
-        $this->setKaikille($kaikille);
-        $this->setLaitos($laitos);
-        $this->setVaihtoehdot($vaihtoehdot);
+      $this->id = $id;
+      $this->kysymys = $kysymys;
+      $this->vastausLaji = $vastausLaji;
+      $this->kaikille = $kaikille;
+      $this->laitos = $laitos;
+      $this->vaihtoehdot = $vaihtoehdot;
     }
 
-    // getterit ja setterit   
+        // getterit ja setterit   
     
     public function getId() {
         return $this->id;

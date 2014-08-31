@@ -6,7 +6,7 @@ $id = (int)$_GET['id'];
 
 $haluttuHenkilo = Henkilo::etsiKayttaja($id);
 
-  if(onkoKirjautunut() && $haluttuHenkilo != nulll ){
+  if(onkoKirjautunut() && $haluttuHenkilo != null ){
     naytaNakyma("henkilonTiedot",array('kayttaja'=> $haluttuHenkilo));
   } else {
     naytaNakyma("henkilonTiedot",array('kayttaja'=> null, 'virhe'=> "Henkilöä ei löytynyt." ));

@@ -1,7 +1,7 @@
           
     <h2>Kirjautuminen</h2>
 
-    <form class="form-horizonal" role="form" action="kirjaudu.php" method="POST">
+    <form class="form-horizonal " role="form" action="kirjaudu.php" method="POST">
       <div class="form-group">
         <label for="tunnus" class="col-md-2 control-label">Käyttäjätunnus: </label>
         <input type="text" class="form-control" name="tunnus" 
@@ -12,7 +12,7 @@
         <input type="password" class="form-control" name="salasana"  > 
       </div> 
       <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 ">
           <button type="submit" class="btn btn-default">Kirjaudu sisään</button>
         </div>
       </div>             
