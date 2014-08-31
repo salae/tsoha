@@ -6,16 +6,22 @@
 
   $poistettavaHenkilo = Henkilo::etsiKayttaja($id);
   
-  if(onkoKirjautunut() && $poistettavaHenkilo != null ){
+  if(onkoKirjautunut() && $_SESSION['kirjautunut']->onkoYllapitaja() && $poistettavaHenkilo != null ){
     $ok = $poistettavaHenkilo->poistaKannasta();
       if($ok) {
         $_SESSION['ilmoitus'] = "Käyttäjä poistettu onnistuneesti.";
         header('Location: henkilot.php');
       } else {
-          naytaNakyma("henkilot", array('virhe'=> "Poistaminen ei onnistunut."));
+        $_SESSION['ilmoitus'] = "Poistaminen ei onnistunut.";
+        header('Location: henkilot.php');
       }
   } else {
-    naytaNakyma("henkilot",array('virhe'=> "Henkilöä ei löytynyt." ));
+    if(!$_SESSION['kirjautunut']->onkoYllapitaja() ){
+      $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia poistaa käyttäjää.";
+      header('Location: henkilot.php');
+    }
+      $_SESSION['ilmoitus'] = "Henkilöä ei löytynyt.";
+      header('Location: henkilot.php');
   }
   
   

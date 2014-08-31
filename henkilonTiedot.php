@@ -9,6 +9,6 @@ $haluttuHenkilo = Henkilo::etsiKayttaja($id);
   if(onkoKirjautunut() && $haluttuHenkilo != null ){
     naytaNakyma("henkilonTiedot",array('kayttaja'=> $haluttuHenkilo));
   } else {
-    naytaNakyma("henkilonTiedot",array('kayttaja'=> null, 'virhe'=> "Henkilöä ei löytynyt." ));
+    naytaNakyma("henkilonTiedot",array('kayttaja'=> new Henkilo(), 'virhe'=> "Henkilöä ei löytynyt." ));
   }
 

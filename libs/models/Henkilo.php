@@ -52,7 +52,7 @@ class Henkilo {
   }
 
   public function onkoYllapitaja() { //nimi järkevämpi mielestäni näin
-      return $this->yllapitaja;
+    return $this->yllapitaja;    
   }
   
   public function getVirheet() {
@@ -100,7 +100,9 @@ class Henkilo {
   }
 
   public function setLaitos($laitos) {
-    trim($laitos);
+    if($this->laitos == '0'){
+      $this->laitos = null;
+    }
     $this->laitos = $laitos;    
   }
 
@@ -117,12 +119,12 @@ class Henkilo {
   
   public static function etsiKayttaja($id) {
     $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
-            . "FROM Henkilo JOIN Laitos ON Henkilo.laitos=Laitos.id WHERE Henkilo.id = ? LIMIT 1";
+            . "FROM Henkilo LEFT OUTER JOIN Laitos ON Henkilo.laitos=Laitos.id WHERE Henkilo.id = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
     $kysely->execute(array($id));
     
     $tulos = $kysely->fetchObject();
-    if ($tulos == null) {
+    if ($tulos->id == null) {
       return null;
     } else {
         $kayttaja = new Henkilo($tulos->id,$tulos->etunimi,$tulos->sukunimi,
@@ -136,7 +138,7 @@ class Henkilo {
   public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {    
  
     $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
-            . "from Henkilo JOIN Laitos ON Henkilo.laitos=Laitos.id where tunnus = ? AND salasana = ? LIMIT 1";
+            . "from Henkilo LEFT OUTER JOIN Laitos ON Henkilo.laitos=Laitos.id where tunnus = ? AND salasana = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
     $kysely->execute(array($kayttaja, $salasana));
 
@@ -185,10 +187,10 @@ class Henkilo {
 
     $ok = $kysely->execute(array($this->getEtunimi(), $this->getSukunimi(),
         $this->getTunnus(), $this->getSalasana(),$this->getLaitos(), $this->getId()));
-//
-//    if ($ok) {
-//        $this->id = $kysely->fetchColumn();
-//    }
+
+    if ($ok) {
+        $this->id = $kysely->fetchColumn();
+    }
     return $ok;    
   }
   

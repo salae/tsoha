@@ -19,7 +19,9 @@
                       .$kayttaja->getEtunimi()); ?></a></td>
             <td><?php echo htmlspecialchars($kayttaja->getTunnus()); ?></td>
             <td><?php echo htmlspecialchars($kayttaja->getLaitos()); ?></td>
-            <td><?php echo htmlspecialchars($kayttaja->onkoYllapitaja()); ?></td>
+            <td><?php if($kayttaja->onkoYllapitaja()): echo '+'; 
+                      else : echo '-';  
+                      endif;?> </td>
             <td><form class="" action="henkiloMuokkaus.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $kayttaja->getId(); ?>">
                 <button type="submit">Muokkaa</button></form></td>

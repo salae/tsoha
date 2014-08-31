@@ -10,7 +10,7 @@
   if(onkoKirjautunut() && $haluttuHenkilo != null ){
     naytaNakyma("muokkaaHenkilo",array('henkilo'=> $haluttuHenkilo));
   } else {
-    naytaNakyma("muokkaaHenkilo",array('henkilo'=> null, 'virhe'=> "Henkilöä ei löytynyt." ));
+    naytaNakyma("muokkaaHenkilo",array('henkilo'=> new Henkilo(), 'virhe'=> "Henkilöä ei löytynyt." ));
   }
 
 

@@ -1,6 +1,7 @@
 <?php
   require_once 'libs/common.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';
+  require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
 
 $id = (int)$_GET['id'];
 
