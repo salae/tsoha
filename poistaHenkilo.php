@@ -20,8 +20,7 @@
       $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia poistaa käyttäjää.";
       header('Location: henkilot.php');
     }
-      $_SESSION['ilmoitus'] = "Henkilöä ei löytynyt.";
-      header('Location: henkilot.php');
+     naytaNakyma("henkilot",array('virhe'=> "Henkilöä ei löytynyt." ));
   }
   
   
