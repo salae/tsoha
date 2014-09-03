@@ -14,7 +14,7 @@
       <!--  yläreunassa tietoja kirjautumisesta ja mahdollisuus kirjautua   -->
       
       <div class="row">      
-          <div class="col-md-3  col-md-offset-9">
+          <div class="col-md-3  col-md-offset-8">
           <?php           
            if(isset($_SESSION['kirjautunut'])): ?>             
               <!--  Poiskirjautuminen-->
@@ -34,7 +34,7 @@
       <!-- sovellusohjelman otsikko  -->
       
       <div class="row">      
-          <div class="col-md-6  col-md-offset-3">
+          <div class="col-md-6  col-md-offset-2">
             <h1>Kurssikysely</h1>
           </div>
       </div>  

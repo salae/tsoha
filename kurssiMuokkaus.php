@@ -11,6 +11,6 @@
   if(onkoKirjautunut() && $haluttuKurssi != null ){
     naytaNakyma("muokkaaKurssi",array('kurssi'=> $haluttuKurssi));
   } else {
-    naytaNakyma("muokkaaKurssi",array('kurssi'=> new Kurssi(), 'virhe'=> "Henkilöä ei löytynyt." ));
+    naytaNakyma("muokkaaKurssi",array('kurssi'=> new Kurssi(), 'virhe'=> "Kurssia ei löytynyt." ));
   }
 

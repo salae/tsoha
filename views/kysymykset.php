@@ -14,12 +14,13 @@
       <tbody>
         <?php foreach($data->kysymykset as $kysymys): ?>
         <tr>
-          <td><a href="#"> 
-              <?php echo htmlspecialchars($kysymys->getKysymys()); ?></a></td>
-          <td><?php echo htmlspecialchars($kysymys->getVastausLaji()); ?></td>
+          <td><?php echo htmlspecialchars($kysymys->getKysymys()); ?></td>          
+          <td><?php echo htmlspecialchars($kysymys->getVastausLajiMerkkijonona())?> </td>         
           <td><?php echo htmlspecialchars($kysymys->getKaikille()); ?></td>
           <td><?php echo htmlspecialchars($kysymys->getLaitos()); ?></td>
-          <td><?php echo htmlspecialchars($kysymys->getVaihtoehdot()); ?></td>
+          <td><?php foreach($kysymys->getVaihtoehdot() as $vaihtoehto): 
+                        echo htmlspecialchars($vaihtoehto).' ';
+                     endforeach; ?></td>
         </tr>
       <?php endforeach; ?>  
       </tbody>

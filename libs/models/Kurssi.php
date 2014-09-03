@@ -1,5 +1,6 @@
 <?php
-require_once "libs/tietokantayhteys.php"; 
+require_once "libs/tietokantayhteys.php";
+require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
 
 class Kurssi {
 
@@ -51,27 +52,34 @@ class Kurssi {
     public function getKysely_aktiivinen() {
       if($this->kysely_aktiivinen) {
         return "aktiivinen";
-      } elseif (5<1) {  //odottaa järkevämää koodia
+      } elseif (new DateTime() > $this->getLoppuPvm() ) {  
         return "mennyt";
-      } else
+      } else {
         return "ei ole tehty";
+      }
     }
-
+    
+    public function getVirheet() {
+      return $this->virheet;
+    }
+    
     public function setId($id) {
-        $this->id = $id;
+        $this->id = (int)$id;
     }
 
     public function setNimi($nimi) {
         $this->nimi = $nimi;
         if(trim($this->nimi) == '') {
-          $this->virheet['nimi'] = "Nimi ei saa olla tyhjä.";
+          $this->virheet['nimi'] = "Kurssin nimi ei saa olla tyhjä.";
+        } else if (is_numeric($this->nimi)) {
+          $this->virheet['nimi'] = "Kurssin nimi ei voi olla pelkkiä numeroita.";          
         } else { 
           unset($this->virheet['nimi']);
         }     
     }
 
     public function setOpettaja($opettaja) {
-       $this->opettaja = $opettaja;
+       $this->opettaja = (int)$opettaja;
        if(trim($this->opettaja) == '') {
           $this->virheet['opettaja'] = "Opettaja ei saa olla tyhjä.";
         } else { 
@@ -80,15 +88,23 @@ class Kurssi {
     }
 
     public function setAlkuPvm($alkuPvm) {
-        $this->alkuPvm = $alkuPvm;
+        $this->alkuPvm = new DateTime($alkuPvm);
+//        
     }
 
     public function setLoppuPvm($loppuPvm) {
-        $this->loppuPvm = $loppuPvm;
+        $this->loppuPvm = new DateTime($loppuPvm);
+//        $loppu = new DateTime($this->loppuPvm);
+//        $alku = new DateTime($this->alkuPvm);
+        if($this->getAlkuPvm() > $this->loppuPvm ){   //alun pitää olla ennen loppua mutta voiko olla sama päivä?
+          $this->virheet['loppupvm'] = "Loppupäivä ei voi olla ennen alkupäivää.";
+        } else { 
+          unset($this->virheet['loppupvm']);
+        }
     }
 
     public function setLaitos($laitos) {
-        $this->laitos = $laitos;
+        $this->laitos = (int)$laitos;
         if(trim($this->laitos) == '') {
           $this->virheet['laitos'] = "Laitos ei saa olla tyhjä.";
         } else { 
@@ -99,6 +115,12 @@ class Kurssi {
     public function setKysely_aktiivinen($kysely_aktiivinen) {
         $this->kysely_aktiivinen = $kysely_aktiivinen;
     }
+    
+    public function setVirheet($virheet) {
+      $this->virheet = $virheet;
+    }
+
+    
     
     /* Etsitään kaikki kurssit kannasta */
 
@@ -139,6 +161,27 @@ class Kurssi {
     }    
   }
   
+      /* Etsitään kannasta kurssit, joiden kysely on aktiivisena  */
+
+    public static function etsiAktiivisetKyselyt() {
+      $sql = "SELECT Kurssi.id AS id, Kurssi.nimi AS nimi, etunimi,sukunimi,alkupvm, loppupvm, Laitos.nimi AS laitos, kysely_aktiivinen "
+              . "FROM Kurssi Join Laitos ON Kurssi.laitos=Laitos.id JOIN Henkilo ON Kurssi.opettaja=Henkilo.id "
+              . "WHERE Kurssi.kysely_aktiivinen = ?"
+              . "ORDER BY alkuPvm DESC, nimi ASC" ;
+      $kysely = getTietokantayhteys()->prepare($sql);
+      $kysely->execute(array(TRUE));
+
+      $tulokset = array();
+      foreach($kysely->fetchAll(PDO::FETCH_NAMED) as $tulos) {
+      $kurssi = new Kurssi($tulos['id'],$tulos['nimi'],$tulos['etunimi'].' '.$tulos['sukunimi'],new DateTime($tulos['alkupvm']),
+       new DateTime($tulos['loppupvm']),$tulos['laitos'],$tulos['kysely_aktiivinen']);       
+
+        $tulokset[] = $kurssi;
+    }
+    return $tulokset;
+  }
+  
+  
     /* Muokataan kurssin tietoja */ 
   
     public function muokkaaTietoja() {
@@ -147,7 +190,7 @@ class Kurssi {
     $kysely = getTietokantayhteys()->prepare($sql);
 
     $ok = $kysely->execute(array($this->getNimi(), $this->getOpettaja(),
-        $this->getAlkuPvm(), $this->getLoppuPvm(),$this->getLaitos(), $this->getId()));
+        $this->getAlkuPvm()->format("Y-m-d H:i:s"), $this->getLoppuPvm()->format("Y-m-d H:i:s"),$this->getLaitos(), $this->getId()));
 
     if ($ok) {
         $this->id = $kysely->fetchColumn();
@@ -159,11 +202,55 @@ class Kurssi {
       * Oletuksena kysely ei ole aktiivinen*/
   
   public function lisaaKantaan() {
-    $sql = "INSERT INTO Kurssi(nimi, opettaja, alkupvm, loppupvm, laitos) VALUES(?,?,?,?,?) RETURNING id";
+    $sql = "INSERT INTO Kurssi(nimi, opettaja, alkupvm, loppupvm, laitos) "
+            . "VALUES(?,?,?,?,?) RETURNING id";
     $kysely = getTietokantayhteys()->prepare($sql);
 
     $ok = $kysely->execute(array($this->getNimi(), $this->getOpettaja(),
-        $this->getAlkuPvm(), $this->getLoppuPvm(),$this->getLaitos()));
+        $this->getAlkuPvm()->format("Y-m-d H:i:s"), $this->getLoppuPvm()->format("Y-m-d H:i:s"),$this->getLaitos()));
+
+    if ($ok) {
+        $this->id = $kysely->fetchColumn();
+    }
+    return $ok;    
+  }
+  
+    /* Poista kurssi tietokannasta  */
+  
+  public function poistaKannasta() {
+    $sql = "DELETE FROM Kurssi WHERE id = ?";
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $ok = $kysely->execute(array($this->getId()));
+    
+    return $ok;
+  }
+  
+   /* Etsii kurssin opettajan  */
+  
+  public function etsiOpettaja() {
+    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
+            . "FROM Kurssi JOIN Henkilo ON Kurssi.opettaja=Henkilo.id "
+            . "WHERE Kurssi.id = ? LIMIT 1";
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $kysely->execute(array($this->getId()));
+    
+    $tulos = $kysely->fetchObject();
+    if ($tulos->id == null) {
+      return null;
+    } else {
+        $kayttaja = new Henkilo($tulos->id,$tulos->etunimi,$tulos->sukunimi,
+           $tulos->tunnus, $tulos->salasana,$tulos->laitos,$tulos->yllapitaja);
+        return $kayttaja;
+    }    
+  }
+  
+      /* Merkitään kurssin kysely aktiiviseksi */ 
+  
+    public function merkitseKyselyAktiiviseksi() {
+    $sql = "UPDATE Kurssi SET kysely_aktiivinen = ? WHERE id = ?";
+    $kysely = getTietokantayhteys()->prepare($sql);
+
+    $ok = $kysely->execute(array(TRUE, $this->getId()));
 
     if ($ok) {
         $this->id = $kysely->fetchColumn();

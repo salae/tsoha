@@ -4,20 +4,24 @@
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Laitos.php'; 
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';
   
-//  session_start(); 
+  session_start(); 
   
     /*  Lomakkeen vastaanottaminen  */
     
   $lisattavaKurssi = new Kurssi();
-  $lisattavaKurssi->setId($_POST["id"]);
+//  $lisattavaKurssi->setId($_POST["id"]);
   $lisattavaKurssi->setNimi($_POST["nimi"]);
   $lisattavaKurssi->setOpettaja($_POST["opettaja"]);
-  $lisattavaKurssi->setAlkuPvm($_POST["alkupvm"]);
-  $lisattavaKurssi->setLoppuPvm($_POST["loppupvm"]);
+  $alkupvm = $_POST["alkuVuosi"].'-'.$_POST["alkuKuukausi"].'-'.$_POST["alkuPaiva"];
+  $lisattavaKurssi->setAlkuPvm($alkupvm);
+  $loppupvm = $_POST["loppuVuosi"].'-'.$_POST["loppuKuukausi"].'-'.$_POST["loppuPaiva"];
+  $lisattavaKurssi->setLoppuPvm($loppupvm);
   $lisattavaKurssi->setLaitos($_POST["laitos"]);
 
  if($lisattavaKurssi->onkoKelvollinen() && $_SESSION['kirjautunut']->onkoYllapitaja() ) {
-    $ok = $lisattavaKurssi->lisaaKantaan();
+
+   $ok = $lisattavaKurssi->lisaaKantaan();
+
     if($ok) {
       $_SESSION['ilmoitus'] = "Kurssi lisätty onnistuneesti.";
       header('Location: kurssit.php');
@@ -28,9 +32,10 @@
     }
 
   }else {
+
     if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
       $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia lisätä kursseja.";
-      header('Location: kurssinLisays.php');
+//      header('Location: kurssinLisays.php');
 //      naytaNakyma("kurssinLisays", array('kurssi'=>$lisattavaKurssi,
 //      'virhe'=> "Sinulla ei ole oikeuksia lisätä kursseja.",
 //      'virheet'=>$lisattavaKurssi->getVirheet()));

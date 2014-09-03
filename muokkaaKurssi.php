@@ -12,9 +12,13 @@
   $muokattuKurssi->setId($_POST["id"]);
   $muokattuKurssi->setNimi($_POST["nimi"]);
   $muokattuKurssi->setOpettaja($_POST["opettaja"]);
-  $muokattuKurssi->setAlkuPvm($_POST["alkupvm"]);
-  $muokattuKurssi->setLoppuPvm($_POST["loppupvm"]);
+  $alkupvm = $_POST["alkuVuosi"].'-'.$_POST["alkuKuukausi"].'-'.$_POST["alkuPaiva"];
+  $muokattuKurssi->setAlkuPvm($alkupvm);
+  $loppupvm = $_POST["loppuVuosi"].'-'.$_POST["loppuKuukausi"].'-'.$_POST["loppuPaiva"];
+  $muokattuKurssi->setLoppuPvm($loppupvm);
   $muokattuKurssi->setLaitos($_POST["laitos"]);
+  
+  var_dump($muokattuKurssi);
 
  if($muokattuKurssi->onkoKelvollinen() && $_SESSION['kirjautunut']->onkoYllapitaja() ) {
     $ok = $muokattuKurssi->muokkaaTietoja();
@@ -30,6 +34,7 @@
   }else {
     if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
       $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
+//       header('Location: kurssit.php');
     }
     naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi, 
         'virheet'=>$muokattuKurssi->getVirheet()));

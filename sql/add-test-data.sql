@@ -30,7 +30,7 @@ INSERT INTO Kysymys (kysymys,vastLaji,kaikille) VALUES ('Mikä oli kurssin vaike
 INSERT INTO Kysymys (kysymys,vastLaji,laitos) VALUES ('Oliko harjoituksissa tarpeeksi tehtäviä?', 2, 4);
 INSERT INTO Kysymys (kysymys,vastLaji,kaikille) VALUES ('Kuinka hyödyllinen kurssi mielestäsi oli?', 2, TRUE);
 INSERT INTO Kysymys (kysymys,vastLaji,vaihtoehdot) VALUES ('Mikä kokeen tehtävistä oli vaikein?',3, '{1,2,3,4,5,6,7}');
-INSERT INTO Kysymys (kysymys,vastLaji,vaihtoehdot) VALUES ('Mikä adjektiivi kuvailisi parhaiten opetusmonistetta?',3, '{"keskeneräinen","hyödyllinen","vaikeaselkoinen","turha","hauska","kiinnostava","omituinen"}');
+INSERT INTO Kysymys (kysymys,vastLaji,vaihtoehdot) VALUES ('Mikä adjektiivi kuvailisi parhaiten opetusmonistetta?',3, '{"keskeneräinen", "hyödyllinen", "vaikeaselkoinen", "turha", "hauska", "kiinnostava", "omituinen"}');
 
 INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (11,1);
 INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (11,2);
@@ -38,6 +38,10 @@ INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (11,3);
 INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (11,4);
 INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (3,2);
 INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (3,4);
+INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (2,1);
+INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (2,5);
+INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (5,5);
+INSERT INTO Kyselykysymys (kurssi, kysymys) VALUES (9,6);
 
 INSERT INTO Vastaus (teksti, k_kysymys) VALUES ('Kaikki lauseet on joko totta tai sitten ei', 1);
 INSERT INTO Vastaus (teksti, k_kysymys) VALUES ('On vaikea päätellä asioita loogisesti pätevästi.', 1);

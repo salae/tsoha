@@ -1,34 +1,34 @@
 
-<!-- varsinainen sisältö  -->      
 
-    <p>
+   <p>
       Kurssikysely-sivustolla voit antaa mielipiteesi käymästäsi kurssista.
-    </p>
+   </p>
 
-    <p>
-      Alla on lista aktiivisista kurssikyselyistä, valitse se, mihin
+   <p>
+      Alla on lista aktiivisista kurssikyselyistä. Valitse se, mihin
       haluat vastata.
-    </p>
+   </p>
 
-    <div class="form-group">           
-      <div class="col-md-6">
-        <select class="form-control">
-          <option>Logiikka I (14.1.2015)</option>
-          <option>Tietokantojen perusteet (14.9.2014)</option>
-          <option>Ohjelmoinnin perusteet (14.1.2015)</option>
-          <option>Ohjelmoinnin jatkokurssi (14.9.2014)</option>
-        </select>
+   <form class="form-horizonal" role="form" action="vastaaminen.php" method="POST"> 
+      <div class="form-group">           
+        <div class="col-md-6">
+          <select class="form-control" name="id">
+                <?php foreach($data->kyselyt as $kurssikysely): ?> 
+                <option value="<?php echo $kurssikysely->getId(); ?>">
+                <?php echo $kurssikysely->getNimi().' (alkanut:'.$kurssikysely->getAlkuPvm()->format('d.m.Y').')'; ?></option>
+                <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="col-md-offset-7">
+          <button type="submit" class="btn btn-default">Vastaa</button>
+        </div>           
       </div>
+   </form>
 
-      <div class="col-md-offset-7">
-        <button type="submit" class="btn btn-default">Vastaa</button>
-      </div>           
-    </div>
-
-
-    <p>
+   <p>
       Jos olet kirjautuneena järjestelmään ja sinulla on tarvittavat 
       oikeudet, voit myös muokata järjestelmän tietoja.
-    </p>
+   </p>
 
  

@@ -7,6 +7,11 @@
 
  
   if(onkoKirjautunut() ){
-     naytaNakyma("kurssinLisays", array('kurssi'=> new Kurssi()));
+    if (!empty($data->kurssi)) {
+      naytaNakyma("kurssinLisays");
+    }  else {
+      naytaNakyma("kurssinLisays", array('kurssi'=> new Kurssi()));
+    }
+         
      
   }
