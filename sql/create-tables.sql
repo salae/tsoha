@@ -41,6 +41,6 @@ CREATE TABLE Kyselykysymys(
 CREATE TABLE Vastaus (
   id    SERIAL NOT NULL PRIMARY KEY,
   teksti    VARCHAR(500),
-  arvo      CHAR(1),
+  arvo      INTEGER,
   k_kysymys   INTEGER REFERENCES Kyselykysymys(id)
 );

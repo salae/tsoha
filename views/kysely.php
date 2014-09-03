@@ -1,8 +1,9 @@
 <h2> <?php echo $data->kurssi->getNimi(); ?></h2>
 
 <form action="vastaaKysely.php" method="POST">
-  
-   <table class="table ">
+    <input type="hidden" name="id" value="<?php echo $data->kurssi->getId(); ?>"/>
+   
+    <table class="table ">
     <thead>
       <tr>
         <th>Kysymys</th>

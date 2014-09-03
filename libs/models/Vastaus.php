@@ -46,6 +46,25 @@ class Vastaus {
     $this->k_kysymys = $k_kysymys;
   }
 
+     /* Lisätään uusi vastaus tietokantaan.*/
+  
+  public function lisaaKantaan() {    
+    if(!empty($this->teksti)){
+      $sql = "INSERT INTO Vastaus(teksti,k_kysymys) VALUES(?,?) RETURNING id"; 
+      $taulukko = array($this->teksti,  $this->k_kysymys);
+    }elseif (!($this->arvo)) {
+      $sql = "INSERT INTO Vastaus(arvo, k_kysymys) VALUES(?,?) RETURNING id"; 
+      $taulukko = array($this->arvo,  $this->k_kysymys);
+    }
 
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $ok = $kysely->execute($taulukko);
+
+    if ($ok) {
+        $this->id = $kysely->fetchColumn();
+    }
+    return $ok;    
+  }
+  
 }
 

@@ -31,7 +31,7 @@
  
   if ( $koekayttaja != null) {
     /* Jos tunnus on oikea, tallennetaan istuntoon käyttäjäoloio ja 
-     * ohjataan käyttäjä sopivalla HTTP-otsakkeella kurssilistaan. */
+     * ohjataan käyttäjä sopivalla HTTP-otsakkeella eutsivulle. */
     $_SESSION['kirjautunut'] = $koekayttaja;
 
     header('Location: index.php');

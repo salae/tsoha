@@ -18,12 +18,6 @@
     }  else {
       header('Location: kirjautuminen.php');
       return false;
-    }
-    
-//    function onkoAdminOikeusia() {
-//      if ($_SESSION['kirjautunut']->getId() == $muokattuKayttaja->getId()) {
-//        
-//      }
-//    }
+    }    
     
   }

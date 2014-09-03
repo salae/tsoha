@@ -88,15 +88,12 @@ class Kurssi {
     }
 
     public function setAlkuPvm($alkuPvm) {
-        $this->alkuPvm = new DateTime($alkuPvm);
-//        
+        $this->alkuPvm = new DateTime($alkuPvm);        
     }
 
     public function setLoppuPvm($loppuPvm) {
         $this->loppuPvm = new DateTime($loppuPvm);
-//        $loppu = new DateTime($this->loppuPvm);
-//        $alku = new DateTime($this->alkuPvm);
-        if($this->getAlkuPvm() > $this->loppuPvm ){   //alun pitää olla ennen loppua mutta voiko olla sama päivä?
+        if($this->getAlkuPvm() > $this->loppuPvm ){   //alun pitää olla ennen loppua tai sama päivä
           $this->virheet['loppupvm'] = "Loppupäivä ei voi olla ennen alkupäivää.";
         } else { 
           unset($this->virheet['loppupvm']);
@@ -119,8 +116,6 @@ class Kurssi {
     public function setVirheet($virheet) {
       $this->virheet = $virheet;
     }
-
-    
     
     /* Etsitään kaikki kurssit kannasta */
 
@@ -179,8 +174,7 @@ class Kurssi {
         $tulokset[] = $kurssi;
     }
     return $tulokset;
-  }
-  
+  }  
   
     /* Muokataan kurssin tietoja */ 
   

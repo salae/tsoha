@@ -18,8 +18,6 @@
   $muokattuKurssi->setLoppuPvm($loppupvm);
   $muokattuKurssi->setLaitos($_POST["laitos"]);
   
-  var_dump($muokattuKurssi);
-
  if($muokattuKurssi->onkoKelvollinen() && $_SESSION['kirjautunut']->onkoYllapitaja() ) {
     $ok = $muokattuKurssi->muokkaaTietoja();
     if($ok) {

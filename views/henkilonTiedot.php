@@ -10,6 +10,6 @@
   </ul> 
 
 <form class="form-horizonal" role="form" action="henkiloMuokkaus.php" method="POST">
-    <input type="hidden" name="id" value="<?php echo $data->kayttaja->getId(); ?>">
+    <input type="hidden" name="id" value="<?php echo $data->kayttaja->getId(); ?>"/>
     <button type="submit" class="btn btn-default">Muuta tietoja</button>
 </form>
