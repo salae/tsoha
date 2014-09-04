@@ -9,12 +9,6 @@
   $etsittyKurssi = Kurssi::etsiKurssi($id);
   
   $kaikkiKysymykset = Kysymys::etsiKyselynKysymykset($etsittyKurssi);
-    
-//  $kaikkiKysymykset = Kysymys::etsiKaikkienYhteisetKysymykset();
-//  $laitosKysymykset = Kysymys::etsiOmanLaitoksenKysymykset($etsittyKurssi);
-//  $kaikkiKysymykset = array_merge($kaikkiKysymykset,$laitosKysymykset);
-//  $vapaatKysymykset = Kysymys::etsiKyselynKysymykset($etsittyKurssi);
-//  $kaikkiKysymykset = array_merge($kaikkiKysymykset, $vapaatKysymykset);
   
   naytaNakyma("kysely",array('kurssi'=> $etsittyKurssi, 
         'kysely'=> $kaikkiKysymykset));

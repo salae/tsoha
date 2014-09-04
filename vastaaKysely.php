@@ -7,5 +7,5 @@
   $lisattvaVastaus = new Vastaus();
   
   
-  $lisattvaVastaus->setK_kysymys($k_kysymys);
+  $lisattvaVastaus->setK_kysymys($_POST["id"]);
 

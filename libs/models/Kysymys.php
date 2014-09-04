@@ -54,8 +54,6 @@ class Kysymys {
     }
     
     public function getVaihtoehdot() {
-      trim((String)$this->vaihtoehdot,"{}");
-//      rtrim($this->vaihtoehdot,'}');
       $valinnat = array();
       $valinnat = explode(',', $this->vaihtoehdot);
       return $valinnat;
