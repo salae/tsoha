@@ -1,3 +1,5 @@
+<!--Yhteenvetotietoja kurssikyselyyn saaduista vastauksista.-->
+
 <h2>Raportti kurssista <?php echo htmlspecialchars($data->kurssi->getNimi()) ?></h2>
 
 <div>

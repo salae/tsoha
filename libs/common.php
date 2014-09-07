@@ -1,5 +1,8 @@
 <?php
-  
+/*
+ * Ylesihyödyllisiä apumetodeita.
+ */
+
    /* Näyttää näkymätiedoston ja lähettää sille muuttujat */
   function naytaNakyma($sivu, $data = array()) {
     $sivu = $sivu;
@@ -13,7 +16,6 @@
     session_start();
     
     if (isset($_SESSION['kirjautunut'])){
-//      $kayttaja = $_SESSION['kayttaja'];
       return true;
     }  else {
       header('Location: kirjautuminen.php');

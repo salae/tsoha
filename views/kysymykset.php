@@ -1,4 +1,7 @@
  <h2>Kysymykset</h2>
+ 
+ <!--  Kysymysten listaus-->
+  
     <table class="table table-striped">
       <thead>
         <tr>

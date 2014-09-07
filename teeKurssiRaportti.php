@@ -1,4 +1,8 @@
 <?php
+/*
+ * Haetaan vastaukset halutun kurssin kyselystä ja ohjataan ne raporttiin.
+ */
+
   require_once 'libs/common.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Vastaus.php';

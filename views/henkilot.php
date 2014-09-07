@@ -1,4 +1,7 @@
-    <h2>Käyttäjät</h2>           
+
+<h2>Käyttäjät</h2>  
+  
+  <!--Listaus rekisteröityneistä sovelluksen käyttäjistä.-->
       
       <table class="table table-striped">
         <thead>

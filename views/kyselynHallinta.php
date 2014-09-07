@@ -1,3 +1,6 @@
+<!--Uuden kyselyn luomiseen käytettävä lomake.
+Alun perin tässä piti olla enemmänkin toimintoja.-->
+
 <h2>Kurssiin <?php echo $data->kurssi->getNimi(); ?> liittyvät kysymykset</h2>
 
   <p>

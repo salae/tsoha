@@ -1,4 +1,7 @@
 <?php
+/*
+ * Henkilö-luokka sovelluksen käyttäjien mallintamiseen.
+ */
 require_once "libs/tietokantayhteys.php"; 
 
 class Henkilo {

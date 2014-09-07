@@ -1,11 +1,14 @@
 <h2>Kurssin lisäys</h2>
 
+    <!--      Lomake, jolla annetaan uuden kurssin tiedot-->
+
       <form class="form-horizonal" role="form" action="lisaaKurssi.php" method="POST">
           <div class="form-group">            
             <label for="nimi" class="col-md-2 control-label">Kurssin nimi: </label>
             <input type="text" class="form-control" name="nimi" 
                    value="<?php echo htmlspecialchars($data->kurssi->getNimi()); ?>"> 
           </div> 
+        
           <div class="form-group">
             <label for="opettaja" class="col-md-2 control-label">Opettaja: </label>
             <select name="opettaja">
@@ -14,7 +17,8 @@
               <?php echo $ope->getEtunimi().' '.$ope->getSukunimi(); ?></option>
               <?php endforeach; ?>
             </select>
-          </div>           
+          </div>  
+        
           <div class="form-group">
             <label for="laitos" class="col-md-2 control-label">Laitos: </label>
             <select name="laitos">              
@@ -24,6 +28,7 @@
               <?php endforeach; ?>
             </select> 
           </div>
+        
           <div class="form-group form-inline">
             <label for="alkupvm" class="col-md-2 control-label">Alkupäivä: </label>
             <select name="alkuPaiva"> 
@@ -42,6 +47,7 @@
               <?php } ?>  
             </select> 
           </div>
+        
           <div class="form-group form-inline">
             <label for="loppupvm" class="col-md-2 control-label">Loppupäivä: </label>
             <select name="loppuPaiva"> 
@@ -60,6 +66,7 @@
               <?php } ?>  
             </select> 
           </div>  
+        
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
               <button type="submit" class="btn btn-default">Tallenna</button>

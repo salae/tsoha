@@ -1,4 +1,8 @@
 <?php
+/*
+ * Vastaanotetaan tiedot kyselyyn tulevista kysymyksistä ja lisätään ne 
+ * tietokantaan. Merkitään kysely aktiiviseksi.
+ */
   require_once 'libs/common.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';

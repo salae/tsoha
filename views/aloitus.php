@@ -1,4 +1,5 @@
-
+  
+  <!--Sovelluksen aloitusnäkymä-->
 
    <p>
       Kurssikysely-sivustolla voit antaa mielipiteesi käymästäsi kurssista.

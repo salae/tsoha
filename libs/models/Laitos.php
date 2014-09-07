@@ -1,4 +1,7 @@
 <?php
+/*
+ * Laitos-luokka tiedekunnan laitosten mallintamiseen.
+ */
 
 class Laitos {
   

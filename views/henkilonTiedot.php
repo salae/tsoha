@@ -1,6 +1,5 @@
 <h2>Henkilötiedot</h2>
 
-
   <ul>
     <li>Nimi: <?php echo $data->kayttaja->getEtunimi()." ".$data->kayttaja->getSukunimi(); ?>
     <li>Tunnus: <?php echo $data->kayttaja->getTunnus(); ?>  

@@ -1,4 +1,6 @@
   <h2>Kurssit</h2>
+  
+<!--  Järjestelmässä olevien kurssien listaus-->
 
   <table class="table table-striped">
     <thead>

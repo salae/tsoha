@@ -9,8 +9,6 @@
   $openKurssit = Kurssi::etsiOpenKurssit($_SESSION['kirjautunut']);
   $laitoksenKurssit = Kurssi::etsiLaitoksenKurssit($laitos);
   
-
-//  var_dump($openKurssit);
   if(onkoKirjautunut()){
     naytaNakyma($sivu,array('kayttaja'=>$_SESSION['kirjautunut'],
         'opeKurssit'=>$openKurssit, 'laitosKurssit'=>$laitoksenKurssit ));

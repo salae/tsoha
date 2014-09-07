@@ -1,4 +1,7 @@
 <?php
+/*
+ * Vastaus-luokka kurssikyselyiden vastausten mallintamiseen.
+ */
 require_once "libs/tietokantayhteys.php"; 
 
 class Vastaus {

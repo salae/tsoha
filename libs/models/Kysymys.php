@@ -1,4 +1,7 @@
 <?php
+/*
+ * Kysymys-luokka kurssikyselyiden kysymysten mallintamiseen.
+ */
 require_once "libs/tietokantayhteys.php"; 
 require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';
 

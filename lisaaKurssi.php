@@ -1,4 +1,7 @@
 <?php
+/*
+ * Vastaanotetaan tiedot uudesta kurssista ja talletetaan uusi kurssi tietokantaan.
+ */
   require_once 'libs/common.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Laitos.php'; 
@@ -35,10 +38,6 @@
 
     if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
       $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia lisätä kursseja.";
-//      header('Location: kurssinLisays.php');
-//      naytaNakyma("kurssinLisays", array('kurssi'=>$lisattavaKurssi,
-//      'virhe'=> "Sinulla ei ole oikeuksia lisätä kursseja.",
-//      'virheet'=>$lisattavaKurssi->getVirheet()));
     }
     naytaNakyma("kurssinLisays", array('kurssi'=>$lisattavaKurssi, 
         'virheet'=>$lisattavaKurssi->getVirheet()));

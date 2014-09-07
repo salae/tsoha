@@ -1,5 +1,7 @@
           
     <h2>Kirjautuminen</h2>
+    
+<!--    Lomake, jolla annetaan kirjautumistiedot-->
 
     <form class="form-horizonal " role="form" action="kirjaudu.php" method="POST">
       <div class="form-group">

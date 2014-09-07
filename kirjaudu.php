@@ -1,4 +1,8 @@
 <?php
+/*
+ * Kirjaudutaan sisään sovellukseen. Tarkistetaan käyttäjätunnus ja salasana 
+ * ja aloitetaan istunto.
+ */
 
   require_once 'libs/common.php';
 //  include_once 'libs/models/Henkilo.php'; 

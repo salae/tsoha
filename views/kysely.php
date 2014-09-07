@@ -1,3 +1,6 @@
+<!--Kyselylomake
+    Vastausten lähetys keskeneräinen-->
+
 <h2> <?php echo $data->kurssi->getNimi(); ?></h2>
 
  <p>

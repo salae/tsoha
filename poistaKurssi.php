@@ -1,4 +1,7 @@
 <?php
+/*
+ * Poistetaan kurssi tietokannasta.
+ */
   require_once 'libs/common.php';
   include_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Kurssi.php';
   include_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';

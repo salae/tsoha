@@ -1,4 +1,7 @@
 <?php
+/*
+ * Otetaan vastaan tiedot kurssin muokkaamisesta ja viedään uudet tiedot tietokantaan.
+ */
   require_once 'libs/common.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Henkilo.php';
   require_once '/home/aesalmin/htdocs/Kurssikysely/libs/models/Laitos.php'; 
@@ -18,15 +21,6 @@
   $muokattuKurssi->setLoppuPvm($loppupvm);
   $muokattuKurssi->setLaitos($_POST["laitos"]);
   
-//  if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
-//  $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
-//       header('Location: kurssit.php');
-//    }
-//    
-//  if ($muokattuKurssi->getLoppuPvm() < new DateTime()) {
-//      $_SESSION['ilmoitus'] = "Menneen kurssin tietoja ei voi muokata.";
-//      header('Location: kurssit.php');
-//}
   
  if($muokattuKurssi->onkoKelvollinen() && $_SESSION['kirjautunut']->onkoYllapitaja() ) {
     $ok = $muokattuKurssi->muokkaaTietoja();
@@ -35,16 +29,8 @@
       header('Location: kurssit.php');
     }else {
       header('Location: kurssit.php');
-//      naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi,
-//      'virhe'=> "Jokin meni muokkaamisessa pieleen",
-//      'virheet'=>$muokattuKurssi->getVirheet()));
     }
-
   }else {
-//    if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
-//      $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
-////       header('Location: kurssit.php');
-//    }
     naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi, 
         'virheet'=>$muokattuKurssi->getVirheet()));
 }

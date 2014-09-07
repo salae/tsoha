@@ -1,6 +1,7 @@
-<h2>Kurssin tietojen muokkaus</h2>
 
-      
+  <!--  Lomake kurssin tietojen muokkaamiseen.-->
+
+  <h2>Kurssin tietojen muokkaus</h2>      
       
       <form class="form-horizonal" role="form" action="muokkaaKurssi.php" method="POST">
           <input type="hidden" name="id" value="<?php echo $data->kurssi->getId(); ?>">
@@ -18,7 +19,7 @@
           <div class="form-group">
             <label for="opettaja" class="col-md-2 control-label">Opettaja: </label>
             <select name="opettaja">
-              <?php foreach(Henkilo::etsiKaikkiKayttajat() as $ope): ?> 
+              <?php foreach($data->opelista as $ope): ?> 
               <option value="<?php echo $ope->getId(); ?>">
               <?php echo $ope->getEtunimi().' '.$ope->getSukunimi(); ?></option>
               <?php endforeach; ?>
@@ -75,7 +76,7 @@
           <div class="form-group">
             <label for="laitos" class="col-md-2 control-label">Laitos: </label>
             <select name="laitos" >              
-              <?php foreach(Laitos::haeKaikki() as $tdk_laitos): ?> 
+              <?php foreach($data->laitoslista as $tdk_laitos): ?> 
               <option value="<?php echo $tdk_laitos->getId(); ?>">
               <?php echo $tdk_laitos->getNimi(); ?></option>
               <?php endforeach; ?>
