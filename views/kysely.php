@@ -22,16 +22,16 @@
        <tr>
           <td><?php echo htmlspecialchars($kysymys->getKysymys()); ?></td>         
           <td><?php if($kysymys->getVastauslaji()==1): ?>
-            <input type="text" class="form-control" name="vastaus[]" /> <?php
+            <input type="text" class="form-control" name="txtVastaus[]" /> <?php
              elseif ($kysymys->getVastauslaji()== 2): ?>
-                <input type="radio" name="arvo" value="1">1
-                <input type="radio" name="arvo" value="2">2
-                <input type="radio" name="arvo" value="3">3
-                <input type="radio" name="arvo" value="4">4
-                <input type="radio" name="arvo" value="5">5 <?php       
+                <input type="radio" name="arvo5[]" value="1">1
+                <input type="radio" name="arvo5[]" value="2">2
+                <input type="radio" name="arvo5[]" value="3">3
+                <input type="radio" name="arvo5[]" value="4">4
+                <input type="radio" name="arvo5[]" value="5">5 <?php       
             elseif($kysymys->getVastauslaji()== 3): 
                 foreach($kysymys->getVaihtoehdot() as $vaihtoehto): ?>
-                  <input type="radio" name="arvo" value="<?php echo $vaihtoehto ?>"><?php echo trim($vaihtoehto,"{}") ?> <br>
+                  <input type="radio" name="vaihtoArvo[]" value="<?php echo $vaihtoehto ?>"><?php echo trim($vaihtoehto,"{}") ?> <br>
                 <?php endforeach;            
             else : echo '-';  
             endif;?> </td>  
