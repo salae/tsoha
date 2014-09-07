@@ -1,4 +1,5 @@
 <h2>Kurssin tiedot</h2>
+
 <div>
   <ul>
     <li>Nimi: <?php echo htmlspecialchars($data->kurssi->getNimi()); ?>
@@ -17,15 +18,14 @@
   </div> 
 </form>
 
+<!--  kyselyntekonappula näkyy vain jos kyselyä ei vielä ole ja kurssi ei ole loppunut -->
 
-
-<form class="form-horizonal" role="form" action="kyselynHallinta.php" method="POST">
-  <div class="form-group">
-    <label for='#'>Kurssikysely: </label><br>  
-    <span>Voit hallinnoida kurssin kyselyä. Jos kurssilla ei ole vielä kyselyä, 
-      tehdään uusi kysely.</span><br>
-    <input type="hidden" name="id" value="<?php echo $data->kurssi->getId(); ?>">
-    <button type="submit" class="btn btn-default">Kyselyyn</button>
-  </div> 
-</form>
+<?php if($data->kurssi->getKysely_aktiivinen() == 'ei ole'): ?>
+  <form action="kyselynHallinta.php" method="POST">
+    <div class="form-group">
+      <input type="hidden" name="id" value="<?php echo $data->kurssi->getId(); ?>">
+      <button type="submit" class="btn btn-default">Tee kurssikysely</button>
+    </div> 
+  </form>
+<?php endif;?>
  

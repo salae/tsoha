@@ -15,10 +15,18 @@
           
 
   if($muokattuKayttaja->onkoKelvollinen()) {
-      $muokattuKayttaja->lisaaKantaan();
+      $ok = $muokattuKayttaja->lisaaKantaan();
       session_start(); 
-      $_SESSION['ilmoitus'] = "Uusi käyttäjä lisätty onnistuneesti.";
-      header('Location: henkilot.php');
+      if($ok){
+//        session_start(); 
+        $_SESSION['ilmoitus'] = "Uusi käyttäjä lisätty onnistuneesti.";
+        header('Location: henkilot.php');
+      }else {
+//        header('Location: henkilot.php');
+        naytaNakyma("rekisterointi", array('henkilo'=>$muokattuKayttaja, 
+        'virheet'=>$muokattuKayttaja->getVirheet()));
+      }
+      
   } else {
       naytaNakyma("rekisterointi", array('henkilo'=>$muokattuKayttaja, 
         'virheet'=>$muokattuKayttaja->getVirheet()));

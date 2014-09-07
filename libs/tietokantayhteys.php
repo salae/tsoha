@@ -7,10 +7,8 @@ function getTietokantayhteys() {
   
   //Jos $yhteys on null, pitää se muodostaa.
   if ($yhteys == null) { 
-    //Tämä koodi suoritetaan vain kerran, sillä seuraavilla 
-    //funktion suorituskerroilla $yhteys-muuttujassa on sisältöä.
     $yhteys = new PDO('pgsql:');
-    $yhteys->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $yhteys->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);    
   }
 
   return $yhteys;

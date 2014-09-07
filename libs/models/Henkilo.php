@@ -45,9 +45,6 @@ class Henkilo {
   }
 
   public function getLaitos() {
-    if($this->laitos == '0'){
-      return null;
-    }
       return $this->laitos;
   }
 
@@ -67,6 +64,8 @@ class Henkilo {
     $this->etunimi = $etunimi;
     if(trim($this->etunimi) == '') {
       $this->virheet['etunimi'] = "Etunimi ei saa olla tyhjä.";
+    } else if(is_numeric($this->etunimi)){
+      $this->virheet['etunimi'] = "Etunimi ei voi olla numero.";
     } else { 
       unset($this->virheet['etunimi']);
     }     
@@ -76,6 +75,8 @@ class Henkilo {
     $this->sukunimi = $sukunimi;
     if(trim($this->sukunimi) == '') {
       $this->virheet['sukunimi'] = "Sukunimi ei saa olla tyhjä.";
+     } else if(is_numeric($this->sukunimi)){
+      $this->virheet['etunimi'] = "Sukunimi ei voi olla numero.";     
     } else { 
       unset($this->virheet['sukunimi']);
     }     
@@ -85,7 +86,7 @@ class Henkilo {
     $this->tunnus = $tunnus;
     if(trim($this->tunnus) == '') {
       $this->virheet['tunnus'] = "Käyttäjätunnus ei saa olla tyhjä.";
-    } else { 
+    }else { 
       unset($this->virheet['tunnus']);
     }      
   }
@@ -100,19 +101,7 @@ class Henkilo {
   }
 
   public function setLaitos($laitos) {
-    if($this->laitos == '0'){
-      $this->laitos = null;
-    }
     $this->laitos = $laitos;    
-  }
-
-  public function setYllapitaja($yllapitaja) {
-      $this->yllapitaja = $yllapitaja;
-      if(!is_bool($this->yllapitaja)) {
-        $this->virheet['yllapito'] = "Yllapito-oikeudet joko on tai ei ole.";      
-      } else {
-        unset($this->virheet['yllapito']);
-      }
   }
   
   /* Etsitään kannasta käyttäjä pääavaimen perusteella */
@@ -156,33 +145,43 @@ class Henkilo {
     * Oletuksena admin-oikeuksia ei ole */
   
   public function lisaaKantaan() {
+    
     $sql = "INSERT INTO Henkilo(etunimi, sukunimi, tunnus, salasana, laitos) VALUES(?,?,?,?,?) RETURNING id";
-    $kysely = getTietokantayhteys()->prepare($sql);
 
-    $ok = $kysely->execute(array($this->getEtunimi(), $this->getSukunimi(),
-        $this->getTunnus(), $this->getSalasana(),$this->getLaitos()));
+    try{
+      $kysely = getTietokantayhteys()->prepare($sql);
 
+      $ok = $kysely->execute(array($this->getEtunimi(), $this->getSukunimi(),
+          $this->getTunnus(), $this->getSalasana(),$this->getLaitos()));
+    }catch (PDOException $pe){ 
+       $this->virheet['lisaaminen'] = 'Henkilön lisäys ei onnistunut. Virhe: '.$pe->getMessage();
+    }
     if ($ok) {
         $this->id = $kysely->fetchColumn();
     }
     return $ok;    
-  }
-  
+  }  
+ 
   /* Poista henkilö tietokannasta  */
   
   public function poistaKannasta() {
     $sql = "DELETE FROM Henkilo WHERE id = ?";
-    $kysely = getTietokantayhteys()->prepare($sql);
-    $ok = $kysely->execute(array($this->getId()));
     
+    try{
+      $kysely = getTietokantayhteys()->prepare($sql);
+      $ok = $kysely->execute(array($this->getId()));
+    }catch (PDOException $pe){      
+      $_SESSION['ilmoitus'] = 'Henkilöa ei voi poistaa. Virhe: '.$pe->getMessage();
+    }
     return $ok;
   }
   
   /* Muokataan henkilön tietoja */ 
   
-    public function muokkaaTietoja() {
+  public function muokkaaTietoja() {
     $sql = "UPDATE Henkilo SET etunimi = ?, sukunimi = ?, tunnus =? , salasana = ?, "
             . "laitos = ? WHERE id = ?";
+    
     $kysely = getTietokantayhteys()->prepare($sql);
 
     $ok = $kysely->execute(array($this->getEtunimi(), $this->getSukunimi(),
@@ -196,22 +195,23 @@ class Henkilo {
   
    /* Etsitään kannasta kaikki käyttäjät  */
   
-    public static function etsiKaikkiKayttajat() {
-      $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
-              . "FROM Henkilo LEFT OUTER JOIN Laitos ON Henkilo.laitos = Laitos.id ORDER BY sukunimi, etunimi, tunnus" ;
-      $kysely = getTietokantayhteys()->prepare($sql);
-      $kysely->execute();
+  public static function etsiKaikkiKayttajat() {
+    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Laitos.nimi AS laitos, yllapitaja "
+            . "FROM Henkilo LEFT OUTER JOIN Laitos ON Henkilo.laitos = Laitos.id ORDER BY sukunimi, etunimi, tunnus" ;
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $kysely->execute();
 
-      $tulokset = array();
-      foreach($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-        $kayttaja = new Henkilo($tulos->id,$tulos->etunimi,$tulos->sukunimi,
-           $tulos->tunnus, $tulos->salasana,$tulos->laitos,$tulos->yllapitaja);       
+    $tulokset = array();
+    foreach($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+      $kayttaja = new Henkilo($tulos->id,$tulos->etunimi,$tulos->sukunimi,
+         $tulos->tunnus, $tulos->salasana,$tulos->laitos,$tulos->yllapitaja);       
 
-        $tulokset[] = $kayttaja;
+      $tulokset[] = $kayttaja;
     }
     return $tulokset;
   }
-    /* Tarkistaa onko olioon asetetut tiedot kelvollisia  */ 
+  
+  /* Tarkistaa onko olioon asetetut tiedot kelvollisia  */ 
   
   public function onkoKelvollinen() {
     return empty($this->virheet);

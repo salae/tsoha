@@ -18,22 +18,33 @@
   $muokattuKurssi->setLoppuPvm($loppupvm);
   $muokattuKurssi->setLaitos($_POST["laitos"]);
   
+//  if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
+//  $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
+//       header('Location: kurssit.php');
+//    }
+//    
+//  if ($muokattuKurssi->getLoppuPvm() < new DateTime()) {
+//      $_SESSION['ilmoitus'] = "Menneen kurssin tietoja ei voi muokata.";
+//      header('Location: kurssit.php');
+//}
+  
  if($muokattuKurssi->onkoKelvollinen() && $_SESSION['kirjautunut']->onkoYllapitaja() ) {
     $ok = $muokattuKurssi->muokkaaTietoja();
     if($ok) {
       $_SESSION['ilmoitus'] = "Kurssin tietoja muokattu onnistuneesti.";
       header('Location: kurssit.php');
     }else {
-      naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi,
-      'virhe'=> "Jokin meni muokkaamisessa pieleen",
-      'virheet'=>$muokattuKurssi->getVirheet()));
+      header('Location: kurssit.php');
+//      naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi,
+//      'virhe'=> "Jokin meni muokkaamisessa pieleen",
+//      'virheet'=>$muokattuKurssi->getVirheet()));
     }
 
   }else {
-    if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
-      $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
-//       header('Location: kurssit.php');
-    }
+//    if (!$_SESSION['kirjautunut']->onkoYllapitaja()) {
+//      $_SESSION['ilmoitus'] = "Sinulla ei ole oikeuksia muuttaa kurssin tietoja.";
+////       header('Location: kurssit.php');
+//    }
     naytaNakyma("muokkaaKurssi", array('kurssi'=>$muokattuKurssi, 
         'virheet'=>$muokattuKurssi->getVirheet()));
 }

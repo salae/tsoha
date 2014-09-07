@@ -34,7 +34,7 @@
      * ohjataan käyttäjä sopivalla HTTP-otsakkeella eutsivulle. */
     $_SESSION['kirjautunut'] = $koekayttaja;
 
-    header('Location: index.php');
+    header('Location: kurssit.php');
   } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("kirjautuminen",  array(

@@ -65,6 +65,47 @@ class Vastaus {
     }
     return $ok;    
   }
-  
+ 
+      /* Etsitään tietyn kyselyn vastaukset kannasta */
+   
+    public static function etsiKyselynVastaukset($kurssi) {      
+
+        $sql = "SELECT Kysymys.kysymys AS kysymys,Vastaus.id AS id, teksti, arvo, k_kysymys "
+                . "FROM Vastaus, Kysymys, Kurssi, Kyselykysymys AS K "
+                . "WHERE Kysymys.id = K.kysymys AND Kurssi.id = K.kurssi AND Vastaus.k_kysymys = K.id AND Kurssi.id = ? "
+                . "ORDER BY k_kysymys, arvo DESC" ;
+        $kysely = getTietokantayhteys()->prepare($sql);      
+        $kysely->execute(Array($kurssi->getId()));
+
+        $tulokset = array();
+        foreach($kysely->fetchAll() as $tulos) {
+          $rivi = array($tulos['kysymys'],$tulos['id'],$tulos['teksti'], $tulos['arvo'], $tulos['k_kysymys']);       
+
+          $tulokset[] = $rivi;
+      }
+      return $tulokset;
+    }
+    
+        /* Etsitään tietyn kyselyn vastausten yhteenvetotietoja kannasta */
+   
+    public static function etsiVastaustenYhteenvedot($kurssi) {
+      
+        $sql = "SELECT Kysymys.id AS id, Kysymys.kysymys AS kysymys, count(arvo) AS lkm, avg(arvo) AS keski "
+          . "FROM Vastaus, Kysymys, Kurssi, Kyselykysymys AS K "
+          . "WHERE Kysymys.id = K.kysymys AND Kurssi.id = K.kurssi AND Vastaus.k_kysymys = K.id AND Kysymys.vastlaji > 1 AND Kurssi.id = ? "
+          . "GROUP BY Kysymys.id, Kysymys.kysymys "
+          . "ORDER BY Kysymys.kysymys" ;
+
+        $kysely = getTietokantayhteys()->prepare($sql);      
+        $kysely->execute(Array($kurssi->getId()));
+
+        $tulokset = array();
+        foreach($kysely->fetchAll() as $tulos) {
+          $rivi = array($tulos['id'],$tulos['kysymys'],$tulos['lkm'], $tulos['keski']);       
+
+          $tulokset[] = $rivi;
+        }
+      return $tulokset;
+    }  
 }
 

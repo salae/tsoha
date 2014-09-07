@@ -15,7 +15,7 @@
           <select class="form-control" name="id">
                 <?php foreach($data->kyselyt as $kurssikysely): ?> 
                 <option value="<?php echo $kurssikysely->getId(); ?>">
-                <?php echo $kurssikysely->getNimi().' (alkanut:'.$kurssikysely->getAlkuPvm()->format('d.m.Y').')'; ?></option>
+                <?php echo $kurssikysely->getNimi().' (aloitus:'.$kurssikysely->getAlkuPvm()->format('d.m.Y').')'; ?></option>
                 <?php endforeach; ?>
           </select>
         </div>

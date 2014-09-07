@@ -24,7 +24,6 @@
           <div class="form-group">
             <label for="laitos" class="col-md-2 control-label">Laitos: </label>
             <select name="laitos">
-              <option value=0>-</option>
               <?php foreach(Laitos::haeKaikki() as $tdk_laitos): ?> 
               <option value="<?php echo $tdk_laitos->getId(); ?>">
               <?php echo $tdk_laitos->getNimi(); ?></option>

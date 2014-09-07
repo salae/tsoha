@@ -7,13 +7,13 @@
 
   $poistettavaKurssi = Kurssi::etsiKurssi($id);
   
-  if(onkoKirjautunut() && $_SESSION['kirjautunut']->onkoYllapitaja() && $poistettavaKurssi != null ){
+  if (onkoKirjautunut() && $_SESSION['kirjautunut']->onkoYllapitaja() && $poistettavaKurssi != null ){
+    
     $ok = $poistettavaKurssi->poistaKannasta();
       if($ok) {
         $_SESSION['ilmoitus'] = "Kurssi poistettu onnistuneesti.";
         header('Location: kurssit.php');
-      } else {
-        $_SESSION['ilmoitus'] = "Kurssin poistaminen ei onnistunut.";
+      } else {            
         header('Location: kurssit.php');
       }
   } else {

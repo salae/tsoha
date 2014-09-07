@@ -55,7 +55,7 @@ class Kurssi {
       } elseif (new DateTime() > $this->getLoppuPvm() ) {  
         return "mennyt";
       } else {
-        return "ei ole tehty";
+        return "ei ole";
       }
     }
     
@@ -128,14 +128,42 @@ class Kurssi {
 
       $tulokset = array();
       foreach($kysely->fetchAll(PDO::FETCH_NAMED) as $tulos) {
-      $kurssi = new Kurssi($tulos['id'],$tulos['nimi'],$tulos['etunimi'].' '.$tulos['sukunimi'],new DateTime($tulos['alkupvm']),
-       new DateTime($tulos['loppupvm']),$tulos['laitos'],$tulos['kysely_aktiivinen']);       
+        $kurssi = new Kurssi($tulos['id'],$tulos['nimi'],$tulos['etunimi'].' '.$tulos['sukunimi'],new DateTime($tulos['alkupvm']),
+        new DateTime($tulos['loppupvm']),$tulos['laitos'],$tulos['kysely_aktiivinen']);       
 
         $tulokset[] = $kurssi;
     }
     return $tulokset;
   }
   
+      /* Etsitään kaikki tietyn opettajan kurssit */
+
+    public static function etsiOpenKurssit($opettaja) {
+
+      $kaikki = Kurssi::etsiKaikkiKurssit();
+      $tulokset = array();
+      foreach($kaikki as $yksi) {
+        if($yksi->getOpettaja() == $opettaja->getEtunimi().' '.$opettaja->getSukunimi()){
+          $tulokset[] = $yksi;
+        }      
+      }
+      return $tulokset;
+    }
+  
+      /* Etsitään kaikki tietyn Laitoksen kurssit */
+
+    public static function etsiLaitoksenKurssit($laitos) {
+
+      $kaikki = Kurssi::etsiKaikkiKurssit();
+      $tulokset = array();
+      foreach($kaikki as $yksi) {
+        if($yksi->getLaitos() == $laitos){
+          $tulokset[] = $yksi;
+        }      
+      }
+      return $tulokset;
+    }
+   
     /* Etsitään kannasta kurssi pääavaimen perusteella */
   
   public static function etsiKurssi($id) {
@@ -179,13 +207,18 @@ class Kurssi {
     /* Muokataan kurssin tietoja */ 
   
     public function muokkaaTietoja() {
-    $sql = "UPDATE Kurssi SET nimi = ?, opettaja = ?, alkupvm =? , loppupvm = ?, "
-            . "laitos = ? WHERE id = ?";
-    $kysely = getTietokantayhteys()->prepare($sql);
+      $sql = "UPDATE Kurssi SET nimi = ?, opettaja = ?, alkupvm =? , loppupvm = ?, "
+              . "laitos = ? WHERE id = ? AND id NOT EXISTS "
+              . "(SELECT K.kurssi FROM Kyselykysymys AS K, Kurssi WHERE K.kurssi = K.id)";
+     
+    try{ 
+      $kysely = getTietokantayhteys()->prepare($sql);
 
-    $ok = $kysely->execute(array($this->getNimi(), $this->getOpettaja(),
-        $this->getAlkuPvm()->format("Y-m-d H:i:s"), $this->getLoppuPvm()->format("Y-m-d H:i:s"),$this->getLaitos(), $this->getId()));
-
+      $ok = $kysely->execute(array($this->getNimi(), $this->getOpettaja(),
+          $this->getAlkuPvm()->format("Y-m-d H:i:s"), $this->getLoppuPvm()->format("Y-m-d H:i:s"),$this->getLaitos(), (int)$this->getId()));
+    }catch (PDOException $pe){      
+      $_SESSION['ilmoitus'] = 'Kurssia ei voi muokata. Virhe: '.$pe->getMessage();
+    }
     if ($ok) {
         $this->id = $kysely->fetchColumn();
     }
@@ -213,16 +246,19 @@ class Kurssi {
   
   public function poistaKannasta() {
     $sql = "DELETE FROM Kurssi WHERE id = ?";
-    $kysely = getTietokantayhteys()->prepare($sql);
-    $ok = $kysely->execute(array($this->getId()));
-    
+    try{
+      $kysely = getTietokantayhteys()->prepare($sql);
+      $ok = $kysely->execute(array($this->getId()));
+    }catch (PDOException $pe){      
+      $_SESSION['ilmoitus'] = 'Kurssia ei voi poistaa. Virhe: '.$pe->getMessage();
+    } 
     return $ok;
   }
   
    /* Etsii kurssin opettajan  */
   
   public function etsiOpettaja() {
-    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, laitos, yllapitaja "
+    $sql = "SELECT Henkilo.id AS id, etunimi, sukunimi, tunnus, salasana, Henkilo.laitos, yllapitaja "
             . "FROM Kurssi JOIN Henkilo ON Kurssi.opettaja=Henkilo.id "
             . "WHERE Kurssi.id = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);

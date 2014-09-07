@@ -16,7 +16,9 @@
         <tr>
           <td><?php echo htmlspecialchars($kysymys->getKysymys()); ?></td>          
           <td><?php echo htmlspecialchars($kysymys->getVastausLajiMerkkijonona())?> </td>         
-          <td><?php echo htmlspecialchars($kysymys->getKaikille()); ?></td>
+          <td><?php if($kysymys->getKaikille()): echo '+'; 
+                      else : echo '-';  
+                      endif;?></td>
           <td><?php echo htmlspecialchars($kysymys->getLaitos()); ?></td>
           <td><?php foreach($kysymys->getVaihtoehdot() as $vaihtoehto): 
                         echo htmlspecialchars($vaihtoehto).' ';

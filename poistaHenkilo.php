@@ -12,7 +12,6 @@
         $_SESSION['ilmoitus'] = "Käyttäjä poistettu onnistuneesti.";
         header('Location: henkilot.php');
       } else {
-        $_SESSION['ilmoitus'] = "Poistaminen ei onnistunut.";
         header('Location: henkilot.php');
       }
   } else {

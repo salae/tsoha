@@ -9,17 +9,17 @@ CREATE TABLE Henkilo (
   sukunimi 	VARCHAR(40) NOT NULL,
   tunnus 	VARCHAR(10) NOT NULL UNIQUE,
   salasana 	VARCHAR(12) NOT NULL,
-  laitos 	INTEGER REFERENCES Laitos(id),
+  laitos 	INTEGER NOT NULL REFERENCES Laitos(id),
   yllapitaja	BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Kurssi (
   id                SERIAL NOT NULL PRIMARY KEY,
   nimi              VARCHAR(70) NOT NULL,
-  opettaja          INTEGER REFERENCES Henkilo(id),
+  opettaja          INTEGER NOT NULL REFERENCES Henkilo(id),
   alkuPVM           TIMESTAMP NOT NULL,
   loppuPVM          TIMESTAMP NOT NULL,
-  laitos            INTEGER REFERENCES Laitos(id),
+  laitos            INTEGER NOT NULL REFERENCES Laitos(id),
   kysely_aktiivinen BOOLEAN DEFAULT FALSE
 );
 
@@ -34,8 +34,8 @@ CREATE TABLE Kysymys (
 
 CREATE TABLE Kyselykysymys(
   id        SERIAL NOT NULL PRIMARY KEY,
-  kurssi    INTEGER REFERENCES Kurssi(id),
-  kysymys   INTEGER REFERENCES Kysymys(id)
+  kurssi    INTEGER NOT NULL REFERENCES Kurssi(id),
+  kysymys   INTEGER NOT NULL REFERENCES Kysymys(id)
 );
 
 CREATE TABLE Vastaus (

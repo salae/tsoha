@@ -20,7 +20,14 @@
         <td><?php echo htmlspecialchars($kurssi->getAlkuPvm()->format('d.m.Y')); ?></td>
         <td><?php echo htmlspecialchars($kurssi->getLoppuPvm()->format('d.m.Y')); ?></td> 
         <td><?php echo htmlspecialchars($kurssi->getLaitos()); ?></td>
-        <td><?php echo htmlspecialchars($kurssi->getKysely_aktiivinen()); ?></td>
+        <td><?php if($kurssi->getKysely_aktiivinen() == 'ei ole'): ?>
+                    <form action="kyselynHallinta.php" method="POST">
+                      <input type="hidden" name="id" value="<?php echo $kurssi->getId(); ?>">
+                      <button type="submit" >Muodosta</button>
+                    </form><?php
+                  else:
+                    echo htmlspecialchars($kurssi->getKysely_aktiivinen());        
+                  endif;?></td>
         <td><form class="" action="kurssiMuokkaus.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $kurssi->getId(); ?>">
                 <button type="submit">Muokkaa</button></form></td>

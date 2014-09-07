@@ -109,7 +109,19 @@ class Kysymys {
     }
     return $tulokset;
   }   
-  
+    
+    /* Lisätään kantaan kurssi-kysymys -pareja kurssikyselyitä varten */
+    
+    public static function lisaaKantaanKyselykysymys($kurssiID, $kysymysID) {
+      $sql = "INSERT INTO Kyselykysymys(kurssi, kysymys) "
+              . "VALUES(?,?) RETURNING id";
+      $kysely = getTietokantayhteys()->prepare($sql);
+
+      $ok = $kysely->execute(array($kurssiID, $kysymysID));
+
+      return $ok;    
+    }     
+      
     /* Etsitään kyselyyn kuuluvat valitut kysymykset kannasta */
    
     public static function etsiKyselynKysymykset($kurssi) {
@@ -129,79 +141,5 @@ class Kysymys {
       }
       return $tulokset;
     }    
-    
-     /* Etsitään kaikkien kurssien yhteiset kysymykset kannasta */
-  
-    public static function etsiKaikkienYhteisetKysymykset() {
-        $sql = "SELECT Kysymys.id AS id, Kysymys.kysymys AS kysymys, vastlaji, kaikille, Kysymys.laitos AS laitos,vaihtoehdot "
-                . "FROM Kysymys "
-                . "WHERE kaikille = ? "
-                . "ORDER BY Kysymys.kysymys" ;
-        $kysely = getTietokantayhteys()->prepare($sql);      
-        $kysely->execute(Array(TRUE));
-
-        $tulokset = array();
-        foreach($kysely->fetchAll() as $tulos) {
-          $kysymys = new Kysymys($tulos['id'],$tulos['kysymys'], $tulos['vastlaji'],
-                  $tulos['kaikille'], $tulos['laitos'], $tulos['vaihtoehdot']);       
-
-          $tulokset[] = $kysymys;
-      }
-      return $tulokset;
-    }    
- 
-    /* Etsitään oman laitoksen kursseille yhteiset kysymykset kannasta */
-    
-     public static function etsiOmanLaitoksenKysymykset($omaKurssi) {
-        $sql = "SELECT DISTINCT Kysymys.id AS id, Kysymys.kysymys AS kysymys, vastlaji, kaikille, Kysymys.laitos AS laitos,vaihtoehdot "
-                . "FROM Kysymys, Laitos, Kurssi "
-                . "WHERE Laitos.id = Kysymys.laitos AND Laitos.id = Kurssi.laitos AND Kurssi.id = ? "
-                . "ORDER BY Kysymys.kysymys" ;
-        $kysely = getTietokantayhteys()->prepare($sql);      
-        $kysely->execute(Array($omaKurssi->getId()));
-
-        $tulokset = array();
-        foreach($kysely->fetchAll() as $tulos) {
-          $kysymys = new Kysymys($tulos['id'],$tulos['kysymys'], $tulos['vastlaji'],
-                  $tulos['kaikille'], $tulos['laitos'], $tulos['vaihtoehdot']);       
-
-          $tulokset[] = $kysymys;
-      }
-      return $tulokset;
-    }  
-    
-    /* Etsitään vapaavalinteiset kysymykset kannasta */
-    
-     public static function etsiValinnaisetKysymykset() {
-        $sql = "SELECT id, kysymys, vastlaji, kaikille, laitos,vaihtoehdot "
-                . "FROM Kysymys "
-                . "WHERE laitos = ? OR NOT kaikille = ? "
-                . "ORDER BY kysymys" ;
-        $kysely = getTietokantayhteys()->prepare($sql);      
-        $kysely->execute(Array(NULL,TRUE));
-
-        $tulokset = array();
-        foreach($kysely->fetchAll() as $tulos) {
-          $kysymys = new Kysymys($tulos['id'],$tulos['kysymys'], $tulos['vastlaji'],
-                  $tulos['kaikille'], $tulos['laitos'], $tulos['vaihtoehdot']);       
-
-          $tulokset[] = $kysymys;
-      }
-      return $tulokset;
-    } 
-    
-    /* Lisätään kantaan kurssi-kysymys -pareja kurssikyselyitä varten */
-    
-    public static function lisaaKantaanKyselykysymys($kurssiID, $kysymysID) {
-      $sql = "INSERT INTO Kyselykysymys(kurssi, kysymys) "
-              . "VALUES(?,?) RETURNING id";
-      $kysely = getTietokantayhteys()->prepare($sql);
-
-      $ok = $kysely->execute(array($kurssiID, $kysymysID));
-
-      return $ok;    
-    } 
-    
-    
 }
 

@@ -1,5 +1,10 @@
 <h2> <?php echo $data->kurssi->getNimi(); ?></h2>
 
+ <p>
+   (Jos vastausvaihtoehtoina on numerot 1-5, niin 1 tarkoittaa helppoa, huonoa tms. 
+   ja 5 vaikeaa, hyvää tai vastaavaa.)
+ </p>
+   
 <form action="vastaaKysely.php" method="POST">
     <input type="hidden" name="id" value="<?php echo $data->kurssi->getId(); ?>"/>
     <table class="table ">
